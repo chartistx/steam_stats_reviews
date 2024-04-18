@@ -1,0 +1,17 @@
+{
+  "name": "steam-stats",
+  "version": "1.0.0",
+  "description": "Steam game stats and reviews",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "steam"
+  ],
+  "author": "Eriks",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
