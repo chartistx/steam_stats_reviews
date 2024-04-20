@@ -1,8 +1,8 @@
 const fs = require("fs");
 const { parse } = require("csv-parse");
 
-const { Pool , Client } = require('pg');
-const { count } = require("console");
+const { Pool } = require('pg');
+
 const pool = new Pool({
     user: 'root',
     host: 'localhost',
@@ -27,7 +27,6 @@ function checkInputVgsales(row){ //cleaning input for vgsales row
         return false;
     
     }
-
     //check if string values contain ', replace with '' so sql query works
     let str_index = [1,2,4,5];
     for(let i = 0; i < str_index.length; i++){
@@ -91,11 +90,11 @@ function migrateReviews(){
     fs.createReadStream("./migrate/steam_data.csv")
     .pipe(parse({ delimiter: ",", from_line: 2, to_line:10000 }))
     .on("data", (async (row) => {
-        
+    
         if(checkInputSteamReviews(row)){//if input row is usable
+            //add row to database
             await pool.query(`INSERT INTO steam_reviews VALUES (DEFAULT,${row[0]},'${row[1]}','${row[2]}',${row[3]},${row[4]});`);
         }
-        //console.log(row);
         }));
 
 }
