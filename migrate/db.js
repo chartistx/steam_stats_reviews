@@ -88,7 +88,7 @@ function migrateReviews(){
     //parse csv file, clean data and insert into  database
 
     fs.createReadStream("./migrate/steam_data.csv")
-    .pipe(parse({ delimiter: ",", from_line: 2, to_line:10000 }))
+    .pipe(parse({ delimiter: ",", from_line: 2, to_line:1000000 }))
     .on("data", (async (row) => {
     
         if(checkInputSteamReviews(row)){//if input row is usable
