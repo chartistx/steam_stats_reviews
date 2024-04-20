@@ -119,7 +119,7 @@ function migrateReviews(){
         );`);
         migrateVgsales();
 
-        // migrate reviews next contains foreign key to vgsales game name
+        // migrate reviews
 
         // add columns
         await pool.query(`CREATE TABLE IF NOT EXISTS steam_reviews (
