@@ -101,7 +101,7 @@ function migrateReviews(){
 
 (async () => {
     try{
-        // migrate vgsales first because game names are unique
+        // migrate vgsales
         // add columns
         await pool.query(`CREATE TABLE IF NOT EXISTS vgsales (
             id SERIAL PRIMARY KEY,
