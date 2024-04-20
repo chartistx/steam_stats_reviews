@@ -50,8 +50,8 @@ function checkInputSteamReviews(row){ //cleaning input for vgsales row
     if(row[0] < 0){
         return false;
     }
-    //check if review_score is between -1 and 1
-    if(row[3] < -1 || row[3] > 1){
+    //check if review_score is -1 or 1
+    if(row[3] != -1 && row[3] != 1){
         return false;
     }
     //check if review_votes is 0 or 1

@@ -1,5 +1,5 @@
 const express = require('express');
-//const client = require('./db.js');
+const salesController = require('./controllers/salesController');
 
 const app = express();
 
@@ -11,7 +11,10 @@ app.get('/', (req, res) => {
     res.send('test');
 });
 
+//call steamController
+salesController(app);
 
+app.listen(3000);
 
 
 
