@@ -1,5 +1,8 @@
 const express = require('express');
+//const client = require('./db.js');
+
 const app = express();
+
 //adding view engine
 app.set('view engine', 'ejs');
 
@@ -7,6 +10,10 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
     res.send('test');
 });
+
+
+
+
 
 
 

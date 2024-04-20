@@ -12,7 +12,9 @@
   "author": "Eriks",
   "license": "ISC",
   "dependencies": {
+    "csv": "^6.3.8",
     "ejs": "^3.1.10",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "pg": "^8.11.5"
   }
 }
