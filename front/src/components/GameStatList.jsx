@@ -1,5 +1,7 @@
 
 import { Table } from 'antd';
+import { useNavigate } from "react-router-dom";
+//import  { useNavigate , Router} from 'react-router-dom'
 //compare values for sorting
 function compareVlues(var1,var2){
     return var1>var2?1:var1===var2?0:-1;
@@ -11,6 +13,13 @@ function compareNrVlues(var1,var2){
 }
 
 const GameStatList = ({ gameStats }) => {
+
+    const navigate = useNavigate();
+
+    function handleClick(id) {
+        navigate(`/games/${id}`);
+    }
+
     const columnNames =[
         // {
         //     title: 'id',
@@ -120,11 +129,26 @@ const GameStatList = ({ gameStats }) => {
         },
     ];    
 
+   
+
     return(
         
         <div>
-
-            <Table columns = {columnNames} dataSource = {gameStats}></Table>   
+            
+            <Table 
+            //check on click and redirect to game description and reviews
+            onRow={(record) => {
+                return {
+                    onClick: () => {
+                        console.log(`clicked on ${record.id}`);
+                        handleClick(record.id);
+                    }
+                };
+            }}
+            columns = {columnNames} 
+            dataSource = {gameStats}>
+                </Table>   
+            
         </div>
     );
 }

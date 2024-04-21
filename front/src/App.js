@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import GameStatList from './components/GameStatList';
+import  { BrowserRouter,Routes, Route } from 'react-router-dom';
+
 
 
 function App() {
+  // const router = createBrowserRouter([
+  //   { path: '/:', 
+  //   element: <GameStatList />,
+  //   errorElement: <div>404 Not Found</div>}
+  // ]);
+
   //const [count, setCount] = useState(() => 0);
   
   const [gameStats, setGameStats] = useState(null); 
@@ -33,18 +41,16 @@ function App() {
     <div>
       <div>
       <h2>table</h2>
-    </div>
-    {/* <div>
-      <button onClick={dec}>-</button>
-      <span>{count}</span>
-      <button onClick={inc}>+</button>
-    </div> */}
-    <div>
-      {
-      //if gameStats are not empty then show data
-      gameStats && <GameStatList gameStats={gameStats}/>
-      }
-    </div>
+        {/* <RouterProvider router={router}/> */}
+        {/* {`
+        //gameStats && <GameStatList gameStats={gameStats}/>  //if gameStats are not empty then show data
+        //`} */}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<GameStatList gameStats={gameStats} />} /> 
+          </Routes>
+        </BrowserRouter>
+      </div>
     </div>
   );
 }
