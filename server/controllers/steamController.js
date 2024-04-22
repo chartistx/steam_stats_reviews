@@ -20,6 +20,7 @@ module.exports = (app,pool)=>{
         
     });
     
+
     app.get('/api/game/reviews/:id', (req, res) => {
         //console.log(`test ${req.params.id}`);
         
@@ -55,6 +56,9 @@ module.exports = (app,pool)=>{
         
     });
         
+    app.get('/api/game/reviews/description/:id', (req, res) => {
+
+    });
     // });
     
     // app.post('/{$game}/reviews/{$review}', (req, res) => {

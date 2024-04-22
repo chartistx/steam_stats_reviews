@@ -1,6 +1,7 @@
 import { Table } from 'antd';
 import { useParams } from "react-router-dom";
 import React, {useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 //compare number values for sorting
 function compareNrVlues(var1,var2){
@@ -11,10 +12,16 @@ function compareNrVlues(var1,var2){
 
 export default function GameCard (){
     const {id} = useParams();
+    const navigate = useNavigate();
 
-    const [gameDescription, setGameData] = useState(null); 
-    const [gameReviews, setGameReviews] = useState(null); 
+    //on row click navigate to specific review
+    function handleClick(id) {
+        navigate(`/games/review/${id}`);
+    }
 
+    const [gameDescription, setGameData] = useState(null); //holds game description data rows
+    const [gameReviews, setGameReviews] = useState(null);  //holds game reviews data rows
+    //clumn names used in table
     const columnNames =[
         // {
         //     title: 'app_id',
@@ -78,37 +85,46 @@ export default function GameCard (){
             setGameReviews(data);
         });
       }, []);
-
+    
+    function ReviewDescription () { //return game description
+        if(gameDescription != null){
+            return(
+                <div>
+                    <p>Game name: {gameDescription[0].name}</p>
+                    <p>Genre: {gameDescription[0].genre}</p>
+                    <p>Platform: {gameDescription[0].platform}</p>
+                    <p>Publisher: {gameDescription[0].publisher}</p>
+                    <p>Year: {gameDescription[0].year}</p>
+                    <p>Rank: {gameDescription[0].rank}</p>
+                    <p>NA Sales: {gameDescription[0].na_sales}</p>
+                    <p>EU Sales: {gameDescription[0].eu_sales}</p>
+                    <p>JP Sales: {gameDescription[0].jp_sales}</p>
+                    <p>Other Sales: {gameDescription[0].other_sales}</p>
+                    <p>Global Sales: {gameDescription[0].global_sales}</p>
+                </div>
+            );
+        }
+        else return null;
+    }
 
     return (
         <div>
             <div>
                 <h1>Game Description</h1>
-                <p>Game name: {gameDescription[0].name}</p>
-                <p>Genre: {gameDescription[0].genre}</p>
-                <p>Platform: {gameDescription[0].platform}</p>
-                <p>Publisher: {gameDescription[0].publisher}</p>
-                <p>Year: {gameDescription[0].year}</p>
-                <p>Rank: {gameDescription[0].rank}</p>
-                <p>NA Sales: {gameDescription[0].na_sales}</p>
-                <p>EU Sales: {gameDescription[0].eu_sales}</p>
-                <p>JP Sales: {gameDescription[0].jp_sales}</p>
-                <p>Other Sales: {gameDescription[0].other_sales}</p>
-                <p>Global Sales: {gameDescription[0].global_sales}</p>
-                
+                <ReviewDescription/>
             </div>
             <div>
                 <h1>Reviews</h1>
                 <Table 
-                    //check on click and redirect to game description and reviews
-                    // onRow={(record) => {
-                    //     return {
-                    //         onClick: () => {
-                    //             console.log(`clicked on ${record.id}`);
-                    //             handleClick(record.id);
-                    //         }
-                    //     };
-                    // }}
+                    check on click and redirect to specific review
+                    onRow={(record) => {
+                        return {
+                            onClick: () => {
+                                console.log(`clicked on ${record.id}`);
+                                handleClick(record.id);
+                            }
+                        };
+                    }}
                     columns = {columnNames} 
                     dataSource = {gameReviews}>
                 </Table>
