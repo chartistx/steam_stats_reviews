@@ -1,7 +1,7 @@
 module.exports = (app,pool)=>{
 
     app.get('/api/game/:id', (req, res) => {
-        console.log(`test ${req.params.id}`);
+        //console.log(`test ${req.params.id}`);
         
         (async () => {
             try{
@@ -57,7 +57,20 @@ module.exports = (app,pool)=>{
     });
         
     app.get('/api/game/reviews/description/:id', (req, res) => {
+        (async () => {
+            try{
+                //fetch and send game description
+                const {rows} = await pool.query(`SELECT * FROM steam_reviews
+                                                WHERE id = ${req.params.id}
+                                                ;`);
+                res.send(JSON.stringify(rows));
 
+                //console.log(rows);
+            }
+            catch(err){
+                console.error(err);
+            }
+        })();
     });
     // });
     

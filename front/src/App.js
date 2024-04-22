@@ -8,23 +8,8 @@ import  { BrowserRouter,Routes, Route } from 'react-router-dom';
 
 
 function App() {
-  // const router = createBrowserRouter([
-  //   { path: '/:', 
-  //   element: <GameStatList />,
-  //   errorElement: <div>404 Not Found</div>}
-  // ]);
 
-  //const [count, setCount] = useState(() => 0);
-  
   const [gameStats, setGameStats] = useState(null); 
-  
-  // function dec() {
-  //   if (count === 0) return;
-  //   setCount(count - 1);
-  // }
-  // function inc() {
-  //   setCount(count + 1);
-  // }
 
   useEffect(() => {
     //fetch vgsales data with reviews count for each game

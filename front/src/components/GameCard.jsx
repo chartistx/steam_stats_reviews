@@ -18,7 +18,7 @@ export default function GameCard (){
     function handleClick(id) {
         navigate(`/games/review/${id}`);
     }
-
+    
     const [gameDescription, setGameData] = useState(null); //holds game description data rows
     const [gameReviews, setGameReviews] = useState(null);  //holds game reviews data rows
     //clumn names used in table
