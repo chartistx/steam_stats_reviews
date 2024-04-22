@@ -4,6 +4,24 @@ module.exports = (app,pool)=>{
     //const connectDatabase = require('../components/connect_db');
     //connect to database
     //connectDatabase();
+    app.put('/api/game/:id',(req, res) => {
+        pool.query(`   UPDATE vgsales 
+                        SET rank=${req.body.rank},
+                            name='${req.body.name}',
+                            platform = '${req.body.platform}',
+                            year = ${req.body.year},
+                            genre = '${req.body.genre}',
+                            publisher = '${req.body.publisher}',
+                            na_sales = ${req.body.na_sales},
+                            eu_sales = ${req.body.eu_sales},
+                            jp_sales = ${req.body.jp_sales},
+                            other_sales = ${req.body.other_sales},
+                            global_sales = ${req.body.global_sales}
+                        WHERE id=${req.params.id};`);
+        
+    });
+
+
     app.post('/api/new_game',(req, res) => {
 
         //read data from put request

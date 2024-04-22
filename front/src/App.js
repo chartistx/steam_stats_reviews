@@ -4,6 +4,7 @@ import GameStatList from './components/GameStatList';
 import GameCard from './components/GameCard';
 import ReviewCard from './components/ReviewCard';
 import NewGame from './components/NewGame';
+import EditGame from './components/EditGame';
 import  { BrowserRouter,Routes, Route ,Link} from 'react-router-dom';
 
 
@@ -39,6 +40,7 @@ function App() {
             <Route path="/games/:id" element={<GameCard/>} />
             <Route path="/games/review/:id" element={<ReviewCard/>} />
             <Route path="/add_new_game" element={<NewGame/>} />
+            <Route path="/games/edit/:id" element={<EditGame/>} />
           </Routes>
 
           

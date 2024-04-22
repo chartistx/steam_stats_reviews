@@ -26,19 +26,17 @@ export default function GameCard (){
     const [gameReviews, setGameReviews] = useState(null);  //holds game reviews data rows
 
     const clickDeleteGame=()=>{
-        //console.log(state.game_id);
+        //console.log(state.record.id);
         //send delete request to server
-        fetch(`http://localhost:5000/games/${state.game_id}`, { method: 'DELETE' })
+        fetch(`http://localhost:5000/games/${state.record.id}`, { method: 'DELETE' })
             .then(() => console.log("Delete successful"));
         //after delete navigate to home
+        
         navigate(`/`);
         window.location.reload();
     }
     const clickEditGame=()=>{
-        //console.log(`clicked on edit ${gameDescription[0].id}`);
-       // fetch(`http://localhost:5000/games${record.id}`, { method: 'DELETE' })
-        //.then(() => this.setState({ status: 'Delete successful' }));
-        //window.location.reload();
+        navigate(`/games/edit/${id}`, { state: { record: state.record } });
     }
     //clumn names used in table
     const columnNames =[
