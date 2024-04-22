@@ -1,6 +1,7 @@
 
 import { Table, Button } from 'antd';
 import { useNavigate } from "react-router-dom";
+import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
 //import React, {onClick } from 'react';
 //import  { useNavigate , Router} from 'react-router-dom'
 //compare values for sorting
@@ -17,13 +18,21 @@ const GameStatList = ({ gameStats }) => {
 
     const navigate = useNavigate();
 
-    function handleClick(id) {
-        navigate(`/games/${id}`);
+    function handleClick( id) {//on row click navigate to specific game
+        //console.log(`clicked on ${e}`);
+        navigate(`/games/${id}`, { state: { game_id: id } });
     }
 
     function clickAddNewGame() {
         navigate(`/add_new_game`);
       }
+
+    // const clickDeleteGame=(record)=>{
+    //     console.log(`clicked on ${record.id}`);
+    //     //fetch(`http://localhost:5000/games${record.id}`, { method: 'DELETE' })
+    //     //.then(() => this.setState({ status: 'Delete successful' }));
+    //     //window.location.reload();
+    // }
 
     const columnNames =[
         // {
@@ -130,8 +139,22 @@ const GameStatList = ({ gameStats }) => {
             key: 'review_count',
             sorter: (row_1, row_2) => {
                 return compareNrVlues(row_1.review_count,row_2.review_count);
+                
             }
-        },
+        }
+        // {
+        //     title: 'Actions',
+        //     key: 'actions',
+        //     render: (record) => {
+        //         return (<>
+        //             <EditOutlined style={{color:'blue'}}/>
+        //             <DeleteOutlined 
+        //                 style={{color:'red'}}
+        //                 onClick={clickDeleteGame(record)}
+        //                 key='delete_game'/>
+        //         </>)
+        //     }
+        // },
     ];    
 
    
@@ -146,7 +169,8 @@ const GameStatList = ({ gameStats }) => {
             onRow={(record) => {
                 return {
                     onClick: () => {
-                        console.log(`clicked on ${record.id}`);
+                        //console.log(`clicked on ${record.id}`);
+                        
                         handleClick(record.id);
                     }
                 };

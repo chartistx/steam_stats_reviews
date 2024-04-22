@@ -1,7 +1,9 @@
-import { Table } from 'antd';
+import { Table,Button } from 'antd';
 import { useParams } from "react-router-dom";
 import React, {useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
+import { useLocation } from 'react-router-dom';
 
 //compare number values for sorting
 function compareNrVlues(var1,var2){
@@ -13,14 +15,31 @@ function compareNrVlues(var1,var2){
 export default function GameCard (){
     const {id} = useParams();
     const navigate = useNavigate();
+    const { state } = useLocation();
 
     //on row click navigate to specific review
     function handleClick(id) {
         navigate(`/games/review/${id}`);
     }
-    
+
     const [gameDescription, setGameData] = useState(null); //holds game description data rows
     const [gameReviews, setGameReviews] = useState(null);  //holds game reviews data rows
+
+    const clickDeleteGame=()=>{
+        //console.log(state.game_id);
+        //send delete request to server
+        fetch(`http://localhost:5000/games/${state.game_id}`, { method: 'DELETE' })
+            .then(() => console.log("Delete successful"));
+        //after delete navigate to home
+        navigate(`/`);
+        window.location.reload();
+    }
+    const clickEditGame=()=>{
+        //console.log(`clicked on edit ${gameDescription[0].id}`);
+       // fetch(`http://localhost:5000/games${record.id}`, { method: 'DELETE' })
+        //.then(() => this.setState({ status: 'Delete successful' }));
+        //window.location.reload();
+    }
     //clumn names used in table
     const columnNames =[
         // {
@@ -110,7 +129,21 @@ export default function GameCard (){
     return (
         <div>
             <div>
-                <h1>Game Description</h1>
+                <h1 >Game Description</h1>
+                <Button
+                    onClick={clickEditGame}>
+                <EditOutlined 
+                    style={{color:'blue'}}
+                    />
+                </Button>
+                <Button
+                    onClick={clickDeleteGame}>
+                    <DeleteOutlined 
+                    style={{color:'red'}}
+                    />
+                </Button>
+                    
+                
                 <ReviewDescription/>
             </div>
             <div>

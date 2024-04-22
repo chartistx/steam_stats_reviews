@@ -56,9 +56,10 @@ module.exports = (app,pool)=>{
    
     //console.log('test');
 
-    // app.get('/sales', (req, res) => {
-
-    // });
+    app.delete('/games/:id', (req, res) => {
+        pool.query(`DELETE FROM vgsales WHERE vgsales.id = ${req.params.id};`);
+        //console.log(req.params.id);
+    });
 
 };
 
