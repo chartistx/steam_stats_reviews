@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import GameStatList from './components/GameStatList';
 import GameCard from './components/GameCard';
+import ReviewCard from './components/ReviewCard';
 import  { BrowserRouter,Routes, Route } from 'react-router-dom';
 
 
@@ -47,6 +48,8 @@ function App() {
           <Routes>
             <Route path="/" element={<GameStatList gameStats={gameStats} />} /> 
             <Route path="/games/:id" element={<GameCard/>} />
+            <Route path="/games/review/:id" element={<ReviewCard/>} />
+
           </Routes>
         </BrowserRouter>
       </div>
