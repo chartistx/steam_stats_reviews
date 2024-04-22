@@ -4,6 +4,8 @@ module.exports = (app,pool)=>{
     //const connectDatabase = require('../components/connect_db');
     //connect to database
     //connectDatabase();
+
+
     app.get('/api/:page', (req, res) => {
         (async () => {
             try{
@@ -33,11 +35,13 @@ module.exports = (app,pool)=>{
         
     });
 
+    
+
     //console.log('test');
 
-    app.get('/sales', (req, res) => {
+    // app.get('/sales', (req, res) => {
 
-    });
+    // });
 
 };
 

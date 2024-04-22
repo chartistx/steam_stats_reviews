@@ -1,5 +1,6 @@
 const express = require('express');
 const salesController = require('./controllers/salesController');
+const steamController = require('./controllers/steamController');
 const cors = require('cors');
 
 const app = express();
@@ -17,19 +18,22 @@ const pool = new Pool({
     
     });
 
-
+//routes for vgsales data api
 salesController(app,pool);
+//routes form specific game description and reviews
+steamController(app,pool);
+
 //requests
 app.get('/', (req, res) => {
     
     res.send('111111111');
 });
 
-app.get('/apx', (req, res) => {
-    //const {rows} = salesController(app,pool);
-    //console.log(rows);
-    //res.send('222222222');
-});
+// app.get('/apx', (req, res) => {
+//     //const {rows} = salesController(app,pool);
+//     //console.log(rows);
+//     //res.send('222222222');
+// });
 
 
 app.listen(5000);

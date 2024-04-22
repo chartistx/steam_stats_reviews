@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import GameStatList from './components/GameStatList';
+import GameCard from './components/GameCard';
 import  { BrowserRouter,Routes, Route } from 'react-router-dom';
 
 
@@ -15,6 +16,7 @@ function App() {
   //const [count, setCount] = useState(() => 0);
   
   const [gameStats, setGameStats] = useState(null); 
+  
   // function dec() {
   //   if (count === 0) return;
   //   setCount(count - 1);
@@ -24,7 +26,7 @@ function App() {
   // }
 
   useEffect(() => {
-    //problem with sql, LEFT JOIN is needed instead of JOIN, also then 
+    //fetch vgsales data with reviews count for each game
     fetch('http://localhost:5000/api/0')
       .then(res=>{
         //console.log(res);
@@ -41,13 +43,10 @@ function App() {
     <div>
       <div>
       <h2>table</h2>
-        {/* <RouterProvider router={router}/> */}
-        {/* {`
-        //gameStats && <GameStatList gameStats={gameStats}/>  //if gameStats are not empty then show data
-        //`} */}
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<GameStatList gameStats={gameStats} />} /> 
+            <Route path="/games/:id" element={<GameCard/>} />
           </Routes>
         </BrowserRouter>
       </div>
