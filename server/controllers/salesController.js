@@ -4,7 +4,24 @@ module.exports = (app,pool)=>{
     //const connectDatabase = require('../components/connect_db');
     //connect to database
     //connectDatabase();
+    app.post('/api/new_game',(req, res) => {
 
+        //read data from put request
+        
+        
+        pool.query(`INSERT INTO vgsales VALUES (DEFAULT,${req.body.rank},'${req.body.game_name}','${req.body.platform}',${req.body.year},'${req.body.genre}','${req.body.publisher}',${req.body.na_sales},${req.body.eu_sales},${req.body.jp_sales},${req.body.other_sales},${req.body.global_sales});`);
+        
+            // if(req.body!=null){//if body is not empty
+                
+            //     // console.log(`INSERT INTO vgsales VALUES (DEFAULT,${req.body.rank},'${req.body.game_name}',
+            //     // '${req.body.platform}',${req.body.year},'${req.body.genre}','${req.body.publisher}',${req.body.na_sales},
+            //     // ${req.body.eu_sales},${req.body.jp_sales},${req.body.other_sales},${req.body.global_sales});`);
+            // }
+        
+        
+        
+});
+    
 
     app.get('/api/:page', (req, res) => {
         (async () => {
@@ -36,7 +53,7 @@ module.exports = (app,pool)=>{
     });
 
     
-
+   
     //console.log('test');
 
     // app.get('/sales', (req, res) => {

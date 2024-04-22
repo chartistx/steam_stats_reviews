@@ -1,6 +1,7 @@
 
-import { Table } from 'antd';
+import { Table, Button } from 'antd';
 import { useNavigate } from "react-router-dom";
+//import React, {onClick } from 'react';
 //import  { useNavigate , Router} from 'react-router-dom'
 //compare values for sorting
 function compareVlues(var1,var2){
@@ -19,6 +20,10 @@ const GameStatList = ({ gameStats }) => {
     function handleClick(id) {
         navigate(`/games/${id}`);
     }
+
+    function clickAddNewGame() {
+        navigate(`/add_new_game`);
+      }
 
     const columnNames =[
         // {
@@ -134,6 +139,7 @@ const GameStatList = ({ gameStats }) => {
     return(
         
         <div>
+            <Button key='clickAddNewStudent' onClick={clickAddNewGame}>Add New Game</Button>
             
             <Table 
             //check on click and redirect to game description and reviews

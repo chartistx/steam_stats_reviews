@@ -5,6 +5,9 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
+const bodyParser = require('body-parser');
+app.use( bodyParser.json() ); 
+app.use(express.json()); 
 //adding view engine
 //app.set('view engine', 'ejs');
 

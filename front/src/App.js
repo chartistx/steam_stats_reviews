@@ -3,7 +3,8 @@ import './App.css';
 import GameStatList from './components/GameStatList';
 import GameCard from './components/GameCard';
 import ReviewCard from './components/ReviewCard';
-import  { BrowserRouter,Routes, Route } from 'react-router-dom';
+import NewGame from './components/NewGame';
+import  { BrowserRouter,Routes, Route ,Link} from 'react-router-dom';
 
 
 
@@ -24,20 +25,25 @@ function App() {
       });
   }, []);
   
+  
 
   return (
     <div>
-      <div>
-      <h2>table</h2>
+      
         <BrowserRouter>
+
+
+          <h1><Link to='/'>Game Stats</Link></h1>
           <Routes>
             <Route path="/" element={<GameStatList gameStats={gameStats} />} /> 
             <Route path="/games/:id" element={<GameCard/>} />
             <Route path="/games/review/:id" element={<ReviewCard/>} />
-
+            <Route path="/add_new_game" element={<NewGame/>} />
           </Routes>
+
+          
         </BrowserRouter>
-      </div>
+      
     </div>
   );
 }
