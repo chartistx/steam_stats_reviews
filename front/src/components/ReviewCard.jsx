@@ -1,9 +1,20 @@
 import { useParams } from "react-router-dom";
 import React, {useEffect, useState } from 'react';
-
+import {Button } from 'antd';
+import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
+import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 export default function ReviewCard (){
     const {id} = useParams();
+    const navigate = useNavigate();
+    const { state } = useLocation();
+
+    //check if user was directed from a game card or used only link
+    if(state==null){
+        //go home if link was used
+        navigate(`/`);
+    }
 
     const [gameReviews, setGameReviews] = useState(null); //sets and holds review details
     useEffect(() => {
@@ -34,11 +45,42 @@ export default function ReviewCard (){
         }
         else return null;
     }
+    
+    const clickDeleteGame=()=>{
 
+        //console.log(state.record.id);
+        //send delete request to server
+
+        fetch(`http://localhost:5000/api/game/reviews/description/${id}`, { method: 'DELETE' })
+            .then(() => console.log("Delete successful"));
+
+        //after delete navigate to home
+        
+        // navigate(`/`);
+        // window.location.reload();
+        console.log(`clicked on delete`);
+    }
+    const clickEditGame=()=>{
+        //navigate to EditGameReview.jsx
+        navigate(`/games/review/edit/${id}`, { state: { record: state.record } });
+        //console.log(state.record);
+    }
 
     return(
         <div>
-            <h1></h1>
+            <h1 >Game Description</h1>
+                <Button
+                    onClick={clickEditGame}>
+                <EditOutlined 
+                    style={{color:'blue'}}
+                    />
+                </Button>
+                <Button
+                    onClick={clickDeleteGame}>
+                    <DeleteOutlined 
+                    style={{color:'red'}}
+                    />
+                </Button>
             <ReviewDescription/>
         </div>
     );

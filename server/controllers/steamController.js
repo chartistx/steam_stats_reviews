@@ -72,15 +72,30 @@ module.exports = (app,pool)=>{
             }
         })();
     });
-    // });
-    
-    // app.post('/{$game}/reviews/{$review}', (req, res) => {
+    app.put('/api/game/reviews/description/:id', (req, res) => {
+        console.log(`test ${req.params.id}`);
+        //update review data in database
+        //console.log(req.body);
+        pool.query(`   UPDATE steam_reviews
+                        SET 
+                            app_name='${req.body.app_name}',
+                            review_text = '${req.body.review_text}',
+                            review_score=${req.body.review_score},
+                            review_votes=${req.body.review_votes}
+                        WHERE id=${req.params.id} ;`);
         
-    // });
+    });
+
+    app.post('/api/game/reviews/description/:id', (req, res) => {
+        //insert new review data into database
+
+        console.log(`test ${req.params.id}`);
+    });
     
-    // app.delete('/{$game}/reviews/{$review}', (req, res) => {
-        
-    // });
+    app.delete('/api/game/reviews/description/:id', (req, res) => {
+        //delete review data from database
+        console.log(`test ${req.params.id}`);
+    });
 
 };
 

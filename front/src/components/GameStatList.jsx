@@ -19,11 +19,13 @@ const GameStatList = ({ gameStats }) => {
     const navigate = useNavigate();
 
     function handleClick( record) {//on row click navigate to specific game
-        //console.log(`clicked on ${e}`);
-        navigate(`/games/${record.id}`, { state: { record: record } });
+        //go to GameCard.jsx
+       //console.log(record);
+       navigate(`/games/${record.id}`, { state: { record: record } });
     }
 
     function clickAddNewGame() {
+        //go to NewGame.jsx
         navigate(`/add_new_game`);
       }
 
@@ -170,7 +172,7 @@ const GameStatList = ({ gameStats }) => {
                 return {
                     onClick: () => {
                         //console.log(`clicked on ${record.id}`);
-                        
+                        //go to GameCard.jsx
                         handleClick(record);
                     }
                 };

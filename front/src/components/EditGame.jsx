@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import {Form, Input,InputNumber, Button} from 'antd';
 import { useNavigate } from "react-router-dom";
 
-export default function NewGame() {
+export default function EditGame() {
     const { state } = useLocation();
     //console.log(state.record.id);
 
@@ -28,7 +28,7 @@ export default function NewGame() {
     
         //on row submit navigate to home
         navigate(`/`);
-         window.location.reload();
+        //window.location.reload();
     };
     
     const onFinishFailed = (errorInfo) => {

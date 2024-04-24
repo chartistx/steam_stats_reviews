@@ -73,7 +73,7 @@ function migrateVgsales(){
 
     //parse csv file, clean data and insert into  database
 
-    fs.createReadStream("./migrate/vgsales.csv")
+    fs.createReadStream("./vgsales.csv")
     .pipe(parse({ delimiter: ",", from_line: 2}))
     .on("data", (async (row) => {
         //check if input is correct
@@ -87,7 +87,7 @@ function migrateReviews(){
 
     //parse csv file, clean data and insert into  database
 
-    fs.createReadStream("./migrate/steam_data.csv")
+    fs.createReadStream("./steam_data.csv")
     .pipe(parse({ delimiter: ",", from_line: 2, to_line:1000000 }))
     .on("data", (async (row) => {
     
@@ -137,7 +137,7 @@ function migrateReviews(){
         console.error( err);
     }
     finally{
-        console.log("migration done");// not accurate , async still working
+       // console.log("migration done");// not accurate , async still working
     }
 })();
 

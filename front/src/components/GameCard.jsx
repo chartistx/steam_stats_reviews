@@ -18,8 +18,9 @@ export default function GameCard (){
     const { state } = useLocation();
 
     //on row click navigate to specific review
-    function handleClick(id) {
-        navigate(`/games/review/${id}`);
+    function handleClick(record) {
+        //console.log(record);
+        navigate(`/games/review/${record.id}`, { state: { record: record } });
     }
 
     const [gameDescription, setGameData] = useState(null); //holds game description data rows
@@ -147,12 +148,12 @@ export default function GameCard (){
             <div>
                 <h1>Reviews</h1>
                 <Table 
-                    check on click and redirect to specific review
+                    //check on click and redirect to specific review
                     onRow={(record) => {
                         return {
                             onClick: () => {
                                 console.log(`clicked on ${record.id}`);
-                                handleClick(record.id);
+                                handleClick(record);
                             }
                         };
                     }}
