@@ -153,7 +153,7 @@ export default function GameCard (){
             <div>
                 <h1>Reviews</h1>
                 
-                <Button key='clickAddNewReview' onClick={clickAddNewGameReview}>Add New Review</Button>
+                <Button key='clickAddNewReview' onClick={clickAddNewGameReview} type='primary'>Add New Review</Button>
                 
                 <Table 
                     //check on click and redirect to specific review

@@ -83,6 +83,7 @@ export default function NewReview() {
                 name="app_name"
                 initialValue={state.record.name}
                 
+                
                 rules={[
                     {
                     required: true,

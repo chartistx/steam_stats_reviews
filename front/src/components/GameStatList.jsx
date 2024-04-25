@@ -1,7 +1,8 @@
 
-import { Table, Button } from 'antd';
+import { Table, Button, Input} from 'antd';
 import { useNavigate } from "react-router-dom";
-import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
+import {EditOutlined, DeleteOutlined, SearchOutlined} from '@ant-design/icons';
+import Search from 'antd/es/transfer/search';
 //import React, {onClick } from 'react';
 //import  { useNavigate , Router} from 'react-router-dom'
 //compare values for sorting
@@ -37,18 +38,50 @@ const GameStatList = ({ gameStats }) => {
     // }
 
     const columnNames =[
-        // {
-        //     title: 'id',
-        //     dataIndex: 'id',
-        //     key: 'id',
-        //     sorter: (row_1, row_2) => {
-        //         return compareVlues(row_1.id,row_2.id);//row_1.id>row_2.id?1:row_1.id===row_2.id?0:-1;
-        //     }
-        // },
         {
             title: 'rank',
             dataIndex: 'rank',
             key: 'rank',
+            filterDropdown:({setSelectedKeys,selectedKeys,confirm,clearFilters, close})=>{
+                return(
+                    <>
+                    <Input 
+                    style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
+                    placeholder='Type here'
+                    value={selectedKeys[0]}
+                    onChange={
+                        (e)=>{
+                        setSelectedKeys(e.target.value? [e.target.value]:[]);
+                        }
+                    }
+                    onPressEnter={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    onBlur={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    
+                    />
+                    <Button onClick={()=>confirm()} type='primary'>Search</Button>
+                    <Button danger onClick={()=>clearFilters()} >Clear Filters</Button>
+                    <Button default style={{float:'right'}} onClick={()=>close()} >Close</Button>
+                    </>
+                    
+                );
+            
+            },
+            filterIcon:()=>{
+                return <SearchOutlined style={{color:'blue'}}/>
+            },
+            onFilter:(value,record)=>{
+                //console.log(record);
+                return record.rank.toString().toLowerCase().includes(value);
+            },
+
             sorter: (row_1, row_2) => {
                 return compareNrVlues(row_1.rank,row_2.rank);
             }
@@ -57,6 +90,45 @@ const GameStatList = ({ gameStats }) => {
             title: 'name',
             dataIndex: 'name',
             key: 'name',
+            filterDropdown:({setSelectedKeys,selectedKeys,confirm,clearFilters, close})=>{
+                return(
+                    <>
+                    <Input 
+                    style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
+                    placeholder='Type here'
+                    value={selectedKeys[0]}
+                    onChange={
+                        (e)=>{
+                        setSelectedKeys(e.target.value? [e.target.value]:[]);
+                        }
+                    }
+                    onPressEnter={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    onBlur={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    
+                    />
+                    <Button onClick={()=>confirm()} type='primary'>Search</Button>
+                    <Button danger onClick={()=>clearFilters()} >Clear Filters</Button>
+                    <Button default style={{float:'right'}} onClick={()=>close()} >Close</Button>
+                    </>
+                    
+                );
+            
+            },
+            filterIcon:()=>{
+                return <SearchOutlined style={{color:'blue'}}/>
+            },
+            onFilter:(value,record)=>{
+                //console.log(record);
+                return record.name.toLowerCase().includes(value.toLowerCase());
+            },
             sorter: (row_1, row_2) => {
                 
                 return compareVlues(row_1.name,row_2.name);
@@ -66,6 +138,45 @@ const GameStatList = ({ gameStats }) => {
             title: 'platform',
             dataIndex: 'platform',
             key: 'platform',
+            filterDropdown:({setSelectedKeys,selectedKeys,confirm,clearFilters, close})=>{
+                return(
+                    <>
+                    <Input 
+                    style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
+                    placeholder='Type here'
+                    value={selectedKeys[0]}
+                    onChange={
+                        (e)=>{
+                        setSelectedKeys(e.target.value? [e.target.value]:[]);
+                        }
+                    }
+                    onPressEnter={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    onBlur={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    
+                    />
+                    <Button onClick={()=>confirm()} type='primary'>Search</Button>
+                    <Button danger onClick={()=>clearFilters()} >Clear Filters</Button>
+                    <Button default style={{float:'right'}} onClick={()=>close()} >Close</Button>
+                    </>
+                    
+                );
+            
+            },
+            filterIcon:()=>{
+                return <SearchOutlined style={{color:'blue'}}/>
+            },
+            onFilter:(value,record)=>{
+                //console.log(record);
+                return record.platform.toLowerCase().includes(value.toLowerCase());
+            },
             sorter: (row_1, row_2) => {
                 return compareVlues(row_1.platform,row_2.platform);
             }
@@ -74,6 +185,45 @@ const GameStatList = ({ gameStats }) => {
             title: 'year',
             dataIndex: 'year',
             key: 'year',
+            filterDropdown:({setSelectedKeys,selectedKeys,confirm,clearFilters, close})=>{
+                return(
+                    <>
+                    <Input 
+                    style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
+                    placeholder='Type here'
+                    value={selectedKeys[0]}
+                    onChange={
+                        (e)=>{
+                        setSelectedKeys(e.target.value? [e.target.value]:[]);
+                        }
+                    }
+                    onPressEnter={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    onBlur={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    
+                    />
+                    <Button onClick={()=>confirm()} type='primary'>Search</Button>
+                    <Button danger onClick={()=>clearFilters()} >Clear Filters</Button>
+                    <Button default style={{float:'right'}} onClick={()=>close()} >Close</Button>
+                    </>
+                    
+                );
+            
+            },
+            filterIcon:()=>{
+                return <SearchOutlined style={{color:'blue'}}/>
+            },
+            onFilter:(value,record)=>{
+                //console.log(record);
+                return record.year.toString().toLowerCase().includes(value);
+            },
             sorter: (row_1, row_2) => {
                 return compareNrVlues(row_1.year,row_2.year);
 
@@ -83,6 +233,45 @@ const GameStatList = ({ gameStats }) => {
             title: 'genre',
             dataIndex: 'genre',
             key: 'genre',
+            filterDropdown:({setSelectedKeys,selectedKeys,confirm,clearFilters, close})=>{
+                return(
+                    <>
+                    <Input 
+                    style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
+                    placeholder='Type here'
+                    value={selectedKeys[0]}
+                    onChange={
+                        (e)=>{
+                        setSelectedKeys(e.target.value? [e.target.value]:[]);
+                        }
+                    }
+                    onPressEnter={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    onBlur={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    
+                    />
+                    <Button onClick={()=>confirm()} type='primary'>Search</Button>
+                    <Button danger onClick={()=>clearFilters()} >Clear Filters</Button>
+                    <Button default style={{float:'right'}} onClick={()=>close()} >Close</Button>
+                    </>
+                    
+                );
+            
+            },
+            filterIcon:()=>{
+                return <SearchOutlined style={{color:'blue'}}/>
+            },
+            onFilter:(value,record)=>{
+                //console.log(record);
+                return record.genre.toLowerCase().includes(value.toLowerCase());
+            },
             sorter: (row_1, row_2) => {
                 return compareVlues(row_1.genre,row_2.genre);
             }
@@ -91,6 +280,45 @@ const GameStatList = ({ gameStats }) => {
             title: 'publisher',
             dataIndex: 'publisher',
             key: 'publisher',
+            filterDropdown:({setSelectedKeys,selectedKeys,confirm,clearFilters, close})=>{
+                return(
+                    <>
+                    <Input 
+                    style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
+                    placeholder='Type here'
+                    value={selectedKeys[0]}
+                    onChange={
+                        (e)=>{
+                        setSelectedKeys(e.target.value? [e.target.value]:[]);
+                        }
+                    }
+                    onPressEnter={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    onBlur={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    
+                    />
+                    <Button onClick={()=>confirm()} type='primary'>Search</Button>
+                    <Button danger onClick={()=>clearFilters()} >Clear Filters</Button>
+                    <Button default style={{float:'right'}} onClick={()=>close()} >Close</Button>
+                    </>
+                    
+                );
+            
+            },
+            filterIcon:()=>{
+                return <SearchOutlined style={{color:'blue'}}/>
+            },
+            onFilter:(value,record)=>{
+                //console.log(record);
+                return record.publisher.toLowerCase().includes(value.toLowerCase());
+            },
             sorter: (row_1, row_2) => {
                 return compareVlues(row_1.publisher,row_2.publisher);
             }
@@ -99,6 +327,45 @@ const GameStatList = ({ gameStats }) => {
             title: 'na_sales',
             dataIndex: 'na_sales',
             key: 'na_sales',
+            filterDropdown:({setSelectedKeys,selectedKeys,confirm,clearFilters, close})=>{
+                return(
+                    <>
+                    <Input 
+                    style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
+                    placeholder='Type here'
+                    value={selectedKeys[0]}
+                    onChange={
+                        (e)=>{
+                        setSelectedKeys(e.target.value? [e.target.value]:[]);
+                        }
+                    }
+                    onPressEnter={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    onBlur={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    
+                    />
+                    <Button onClick={()=>confirm()} type='primary'>Search</Button>
+                    <Button danger onClick={()=>clearFilters()} >Clear Filters</Button>
+                    <Button default style={{float:'right'}} onClick={()=>close()} >Close</Button>
+                    </>
+                    
+                );
+            
+            },
+            filterIcon:()=>{
+                return <SearchOutlined style={{color:'blue'}}/>
+            },
+            onFilter:(value,record)=>{
+                //console.log(record);
+                return record.na_sales.toString().toLowerCase().includes(value);
+            },
             sorter: (row_1, row_2) => {
                 return compareNrVlues(row_1.na_sales,row_2.na_sales);
             }
@@ -107,6 +374,45 @@ const GameStatList = ({ gameStats }) => {
             title: 'eu_sales',
             dataIndex: 'eu_sales',
             key: 'eu_sales',
+            filterDropdown:({setSelectedKeys,selectedKeys,confirm,clearFilters, close})=>{
+                return(
+                    <>
+                    <Input 
+                    style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
+                    placeholder='Type here'
+                    value={selectedKeys[0]}
+                    onChange={
+                        (e)=>{
+                        setSelectedKeys(e.target.value? [e.target.value]:[]);
+                        }
+                    }
+                    onPressEnter={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    onBlur={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    
+                    />
+                    <Button onClick={()=>confirm()} type='primary'>Search</Button>
+                    <Button danger onClick={()=>clearFilters()} >Clear Filters</Button>
+                    <Button default style={{float:'right'}} onClick={()=>close()} >Close</Button>
+                    </>
+                    
+                );
+            
+            },
+            filterIcon:()=>{
+                return <SearchOutlined style={{color:'blue'}}/>
+            },
+            onFilter:(value,record)=>{
+                //console.log(record);
+                return record.eu_sales.toString().toLowerCase().includes(value);
+            },
             sorter: (row_1, row_2) => {
                 return compareNrVlues(row_1.eu_sales,row_2.eu_sales);
             }
@@ -115,6 +421,45 @@ const GameStatList = ({ gameStats }) => {
             title: 'jp_sales',
             dataIndex: 'jp_sales',
             key: 'jp_sales',
+            filterDropdown:({setSelectedKeys,selectedKeys,confirm,clearFilters, close})=>{
+                return(
+                    <>
+                    <Input 
+                    style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
+                    placeholder='Type here'
+                    value={selectedKeys[0]}
+                    onChange={
+                        (e)=>{
+                        setSelectedKeys(e.target.value? [e.target.value]:[]);
+                        }
+                    }
+                    onPressEnter={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    onBlur={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    
+                    />
+                    <Button onClick={()=>confirm()} type='primary'>Search</Button>
+                    <Button danger onClick={()=>clearFilters()} >Clear Filters</Button>
+                    <Button default style={{float:'right'}} onClick={()=>close()} >Close</Button>
+                    </>
+                    
+                );
+            
+            },
+            filterIcon:()=>{
+                return <SearchOutlined style={{color:'blue'}}/>
+            },
+            onFilter:(value,record)=>{
+                //console.log(record);
+                return record.jp_sales.toString().toLowerCase().includes(value);
+            },
             sorter: (row_1, row_2) => {
                 return compareNrVlues(row_1.jp_sales,row_2.jp_sales);
             }
@@ -123,6 +468,45 @@ const GameStatList = ({ gameStats }) => {
             title: 'other_sales',
             dataIndex: 'other_sales',
             key: 'other_sales',
+            filterDropdown:({setSelectedKeys,selectedKeys,confirm,clearFilters, close})=>{
+                return(
+                    <>
+                    <Input 
+                    style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
+                    placeholder='Type here'
+                    value={selectedKeys[0]}
+                    onChange={
+                        (e)=>{
+                        setSelectedKeys(e.target.value? [e.target.value]:[]);
+                        }
+                    }
+                    onPressEnter={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    onBlur={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    
+                    />
+                    <Button onClick={()=>confirm()} type='primary'>Search</Button>
+                    <Button danger onClick={()=>clearFilters()} >Clear Filters</Button>
+                    <Button default style={{float:'right'}} onClick={()=>close()} >Close</Button>
+                    </>
+                    
+                );
+            
+            },
+            filterIcon:()=>{
+                return <SearchOutlined style={{color:'blue'}}/>
+            },
+            onFilter:(value,record)=>{
+                //console.log(record);
+                return record.other_sales.toString().toLowerCase().includes(value);
+            },
             sorter: (row_1, row_2) => {
                 return compareNrVlues(row_1.other_sales,row_2.other_sales);
             }
@@ -131,6 +515,45 @@ const GameStatList = ({ gameStats }) => {
             title: 'global_sales',
             dataIndex: 'global_sales',
             key: 'global_sales',
+            filterDropdown:({setSelectedKeys,selectedKeys,confirm,clearFilters, close})=>{
+                return(
+                    <>
+                    <Input 
+                    style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
+                    placeholder='Type here'
+                    value={selectedKeys[0]}
+                    onChange={
+                        (e)=>{
+                        setSelectedKeys(e.target.value? [e.target.value]:[]);
+                        }
+                    }
+                    onPressEnter={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    onBlur={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    
+                    />
+                    <Button onClick={()=>confirm()} type='primary'>Search</Button>
+                    <Button danger onClick={()=>clearFilters()} >Clear Filters</Button>
+                    <Button default style={{float:'right'}} onClick={()=>close()} >Close</Button>
+                    </>
+                    
+                );
+            
+            },
+            filterIcon:()=>{
+                return <SearchOutlined style={{color:'blue'}}/>
+            },
+            onFilter:(value,record)=>{
+                //console.log(record);
+                return record.global_sales.toString().toLowerCase().includes(value);
+            },
             sorter: (row_1, row_2) => {
                 return compareNrVlues(row_1.global_sales,row_2.global_sales);
             }
@@ -139,6 +562,45 @@ const GameStatList = ({ gameStats }) => {
             title: 'review_count',
             dataIndex: 'review_count',
             key: 'review_count',
+            filterDropdown:({setSelectedKeys,selectedKeys,confirm,clearFilters, close})=>{
+                return(
+                    <>
+                    <Input 
+                    style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
+                    placeholder='Type here'
+                    value={selectedKeys[0]}
+                    onChange={
+                        (e)=>{
+                        setSelectedKeys(e.target.value? [e.target.value]:[]);
+                        }
+                    }
+                    onPressEnter={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    onBlur={
+                        (e)=>{
+                            confirm();
+                        }
+                    }
+                    
+                    />
+                    <Button onClick={()=>confirm()} type='primary'>Search</Button>
+                    <Button danger onClick={()=>clearFilters()} >Clear Filters</Button>
+                    <Button default style={{float:'right'}} onClick={()=>close()} >Close</Button>
+                    </>
+                    
+                );
+            
+            },
+            filterIcon:()=>{
+                return <SearchOutlined style={{color:'blue'}}/>
+            },
+            onFilter:(value,record)=>{
+                //console.log(record);
+                return record.review_count.toString().toLowerCase().includes(value);
+            },
             sorter: (row_1, row_2) => {
                 return compareNrVlues(row_1.review_count,row_2.review_count);
                 
@@ -164,7 +626,7 @@ const GameStatList = ({ gameStats }) => {
     return(
         
         <div>
-            <Button key='clickAddNewGame' onClick={clickAddNewGame}>Add New Game</Button>
+            <Button type='primary' key='clickAddNewGame' onClick={clickAddNewGame}>Add New Game</Button>
             
             <Table 
             //check on click and redirect to game description and reviews
