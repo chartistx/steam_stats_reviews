@@ -6,6 +6,7 @@ import ReviewCard from './components/ReviewCard';
 import NewGame from './components/NewGame';
 import EditGame from './components/EditGame';
 import EditGameReview from './components/EditGameReview';
+import NewReview from './components/NewReview';
 import  { BrowserRouter,Routes, Route ,Link} from 'react-router-dom';
 
 
@@ -37,12 +38,18 @@ function App() {
 
           <h1><Link to='/'>Game Stats</Link></h1>
           <Routes>
-            <Route path="/" element={<GameStatList gameStats={gameStats} />} /> 
-            <Route path="/games/:id" element={<GameCard/>} />
-            <Route path="/games/review/:id" element={<ReviewCard/>} />
+            <Route path="/" element={<GameStatList gameStats={gameStats} />} />
             <Route path="/add_new_game" element={<NewGame/>} />
+
+            <Route path="/games/new_review" element={<NewReview/>} />
+            <Route path="/games/:id" element={<GameCard/>} />
+
             <Route path="/games/edit/:id" element={<EditGame/>} />
+            <Route path="/games/review/:id" element={<ReviewCard/>} />
+            
             <Route path="/games/review/edit/:id" element={<EditGameReview/>} />
+
+
           </Routes>
 
           

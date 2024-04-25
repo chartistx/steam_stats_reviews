@@ -164,7 +164,7 @@ const GameStatList = ({ gameStats }) => {
     return(
         
         <div>
-            <Button key='clickAddNewStudent' onClick={clickAddNewGame}>Add New Game</Button>
+            <Button key='clickAddNewGame' onClick={clickAddNewGame}>Add New Game</Button>
             
             <Table 
             //check on click and redirect to game description and reviews

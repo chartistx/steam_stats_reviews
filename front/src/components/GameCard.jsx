@@ -39,6 +39,10 @@ export default function GameCard (){
     const clickEditGame=()=>{
         navigate(`/games/edit/${id}`, { state: { record: state.record } });
     }
+    const clickAddNewGameReview = ()=> {
+        //go to NewGame.jsx
+        navigate(`/games/new_review`, { state: { record: state.record } });
+      }
     //clumn names used in table
     const columnNames =[
         // {
@@ -141,12 +145,16 @@ export default function GameCard (){
                     style={{color:'red'}}
                     />
                 </Button>
-                    
+                
+                
                 
                 <ReviewDescription/>
             </div>
             <div>
                 <h1>Reviews</h1>
+                
+                <Button key='clickAddNewReview' onClick={clickAddNewGameReview}>Add New Review</Button>
+                
                 <Table 
                     //check on click and redirect to specific review
                     onRow={(record) => {

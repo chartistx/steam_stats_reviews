@@ -10,7 +10,7 @@ export default function EditGame() {
 
     const onFinish = (values) => {
         
-        
+        //console.log('Success:', values);
         //edit changes in database a
         //redirect home and refresh window
 
@@ -27,8 +27,8 @@ export default function EditGame() {
     
     
         //on row submit navigate to home
-        navigate(`/`);
-        //window.location.reload();
+        navigate(`/games/${state.record.id}`, { state: { record: values } });
+        window.location.reload();
     };
     
     const onFinishFailed = (errorInfo) => {

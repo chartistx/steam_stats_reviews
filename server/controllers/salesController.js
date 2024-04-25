@@ -3,10 +3,12 @@ module.exports = (app,pool)=>{
 
     app.put('/api/game/:id',(req, res) => {
         //replace all ' wtih '' to avoid sql errors
-        req.body.name = req.body.review_text.replace(/'/g, "''");
-        req.body.platform = req.body.app_name.replace(/'/g, "''");
-        req.body.genre = req.body.review_text.replace(/'/g, "''");
-        req.body.publisher = req.body.review_text.replace(/'/g, "''");
+        //console.log(${req.body});
+        //console.log(req.body);
+        req.body.name = req.body.name.replace(/'/g, "''");
+        req.body.platform = req.body.platform.replace(/'/g, "''");
+        req.body.genre = req.body.genre.replace(/'/g, "''");
+        req.body.publisher = req.body.publisher.replace(/'/g, "''");
 
         //update record
         pool.query(`   UPDATE vgsales 
@@ -27,12 +29,12 @@ module.exports = (app,pool)=>{
 
 
     app.post('/api/new_game',(req, res) => {
-
+        //console.log(req.body);
         //replace all ' with '' to avoid sql errors
-        req.body.name = req.body.review_text.replace(/'/g, "''");
-        req.body.platform = req.body.app_name.replace(/'/g, "''");
-        req.body.genre = req.body.review_text.replace(/'/g, "''");
-        req.body.publisher = req.body.review_text.replace(/'/g, "''");
+        req.body.game_name = req.body.game_name.replace(/'/g, "''");
+        req.body.platform = req.body.platform.replace(/'/g, "''");
+        req.body.genre = req.body.genre.replace(/'/g, "''");
+        req.body.publisher = req.body.publisher.replace(/'/g, "''");
         //insert new game data into database
         pool.query(`INSERT INTO vgsales VALUES (DEFAULT,${req.body.rank},'${req.body.game_name}','${req.body.platform}',${req.body.year},'${req.body.genre}','${req.body.publisher}',${req.body.na_sales},${req.body.eu_sales},${req.body.jp_sales},${req.body.other_sales},${req.body.global_sales});`);
                
