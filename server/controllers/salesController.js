@@ -1,9 +1,6 @@
-const { Typography } = require("antd");
 
 module.exports = (app,pool)=>{
-    //const connectDatabase = require('../components/connect_db');
-    //connect to database
-    //connectDatabase();
+
     app.put('/api/game/:id',(req, res) => {
         //replace all ' wtih '' to avoid sql errors
         req.body.name = req.body.review_text.replace(/'/g, "''");
@@ -38,16 +35,7 @@ module.exports = (app,pool)=>{
         req.body.publisher = req.body.review_text.replace(/'/g, "''");
         //insert new game data into database
         pool.query(`INSERT INTO vgsales VALUES (DEFAULT,${req.body.rank},'${req.body.game_name}','${req.body.platform}',${req.body.year},'${req.body.genre}','${req.body.publisher}',${req.body.na_sales},${req.body.eu_sales},${req.body.jp_sales},${req.body.other_sales},${req.body.global_sales});`);
-        
-            // if(req.body!=null){//if body is not empty
-                
-            //     // console.log(`INSERT INTO vgsales VALUES (DEFAULT,${req.body.rank},'${req.body.game_name}',
-            //     // '${req.body.platform}',${req.body.year},'${req.body.genre}','${req.body.publisher}',${req.body.na_sales},
-            //     // ${req.body.eu_sales},${req.body.jp_sales},${req.body.other_sales},${req.body.global_sales});`);
-            // }
-        
-        
-        
+               
 });
     
 
@@ -68,9 +56,6 @@ module.exports = (app,pool)=>{
                                                         vgsales.na_sales,vgsales.eu_sales,vgsales.jp_sales,
                                                         vgsales.other_sales,vgsales. global_sales
                                                 `);
-                                                //ORDER BY vgsales.name ASC
-                                                // OFFSET ${req.params.page * 30} ROWS
-                                                // FETCH FIRST 30 ROWS ONLY;
                 res.send(JSON.stringify(rows));
             }
             catch(err){

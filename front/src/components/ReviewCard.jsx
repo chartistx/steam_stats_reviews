@@ -46,7 +46,7 @@ export default function ReviewCard (){
         else return null;
     }
     
-    const clickDeleteGame=()=>{
+    const clickDeleteGameReview=()=>{
 
         //console.log(state.record.id);
         //send delete request to server
@@ -56,11 +56,11 @@ export default function ReviewCard (){
 
         //after delete navigate to home
         
-        // navigate(`/`);
-        // window.location.reload();
+        navigate(`/`);
+        window.location.reload();
         console.log(`clicked on delete`);
     }
-    const clickEditGame=()=>{
+    const clickEditGameReview=()=>{
         //navigate to EditGameReview.jsx
         navigate(`/games/review/edit/${id}`, { state: { record: state.record } });
         //console.log(state.record);
@@ -68,15 +68,15 @@ export default function ReviewCard (){
 
     return(
         <div>
-            <h1 >Game Description</h1>
+            <h1 >Review</h1>
                 <Button
-                    onClick={clickEditGame}>
+                    onClick={clickEditGameReview}>
                 <EditOutlined 
                     style={{color:'blue'}}
                     />
                 </Button>
                 <Button
-                    onClick={clickDeleteGame}>
+                    onClick={clickDeleteGameReview}>
                     <DeleteOutlined 
                     style={{color:'red'}}
                     />

@@ -97,7 +97,7 @@ module.exports = (app,pool)=>{
     
     app.delete('/api/game/reviews/description/:id', (req, res) => {
         //delete review data from database
-        console.log(`test ${req.params.id}`);
+        pool.query(`DELETE FROM steam_reviews WHERE id = ${req.params.id};`);
     });
 
 };
