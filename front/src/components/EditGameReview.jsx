@@ -4,27 +4,15 @@ import { useNavigate } from "react-router-dom";
 //import {Option} from 'antd/es/mentions';
 
 export default function EditGameReview() {
-    const { state } = useLocation();
-    const navigate = useNavigate();
 
-    const { Option } = Select;//used in dropdown menu
-    const { TextArea } = Input;
+    const { state } = useLocation();//get game data from previous page
+    const navigate = useNavigate();//used for navigation
 
-    //check if user was directed from a game card or used only link
-    // if(state==null){
-    //     //go home if link was used
-    //     navigate(`/`);
-    // }
-    
-    //console.log(state.record.id);
-    
+    const { Option } = Select;//used in dropdown menu in form
+    const { TextArea } = Input;//used for text area in form
 
-
+    //runs if form submission is successful
     const onFinish = (values) => {
-        //console.log('Success:', state.record.id);
-        
-        //edit changes in database a
-        //redirect home and refresh window
 
         //send form data to server
         const requestOptions = {
@@ -38,16 +26,18 @@ export default function EditGameReview() {
             .then(data => console.log('Review Successfully Edited'));
     
     
-        //on row submit navigate to home
+        //on row submit navigate back to review card, refresh window to show changes
         navigate(`/games/review/${state.record.id}`, { state: { record: values } });
         window.location.reload();
     };
     
+    //runs if form submission fails
     const onFinishFailed = (errorInfo) => {
         //console.log(state.record);
         console.log('Failed:', errorInfo);
     };
 
+    //create form for editing review data
     return (
         <Row style={{height:'80vh'}}>
             <Col span={14} offset={5} >
@@ -94,8 +84,6 @@ export default function EditGameReview() {
                 >
                 <Select
                     placeholder="Select a option and change input text above"
-                    //onChange={onGenderChange}
-                    //allowClear
                     >
                     <Option value="1">Would recommend the game</Option>
                     <Option value="-1">Would NOT recommend the game</Option>
@@ -116,8 +104,6 @@ export default function EditGameReview() {
                 >
                 <Select
                     placeholder="Select a option and change input text above"
-                    //onChange={onGenderChange}
-                    //allowClear
                     >
                     <Option value="1">Game was recommended by another user</Option>
                     <Option value="0">Game was NOT recommended by another user</Option>
@@ -136,8 +122,6 @@ export default function EditGameReview() {
                 >
                 <TextArea rows={6} />
                 </Form.Item>
-
-                
 
                 <Form.Item
                 style={{textAlign:'center'}}

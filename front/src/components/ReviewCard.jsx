@@ -8,31 +8,9 @@ import { useLocation } from 'react-router-dom';
 export default function ReviewCard (){
     const {id} = useParams();
     const navigate = useNavigate();
-    const { state } = useLocation();
+    const { state } = useLocation();//get review data from previous page
 
-    //check if user was directed from a game card or used only link
-    if(state==null){
-        //go home if link was used
-        navigate(`/`);
-    }
-
-    //const [gameReviews, setGameReviews] = useState(null); //sets and holds review details
-    // useEffect(() => {
-    //     //fetch specific review
-    //     fetch(`http://localhost:5000/api/game/reviews/description/${id}`)
-    //     .then(res=>{
-    //         //console.log(res);
-    //         return res.json();
-    //     })
-    //     .then(data=>{
-    //         //console.log(data);
-    //         setGameReviews(data);
-    //     });
-
-        
-    //   }, []);
-
-      function ReviewDescription () { //return game description
+      function ReviewDescription () { //display review data
         if(state.record != null){
             return(
                 <div style={{textAlign:'center', backgroundColor:'white', padding:'10px', marginTop:'10px',borderRadius:'10px'}}>
@@ -46,26 +24,25 @@ export default function ReviewCard (){
         else return null;
     }
     
+    //when clicked on delete button
     const clickDeleteGameReview=()=>{
 
-        //console.log(state.record.id);
         //send delete request to server
-
         fetch(`http://localhost:5000/api/game/reviews/description/${id}`, { method: 'DELETE' })
             .then(() => console.log("Delete successful"));
 
         //after delete navigate to home
-        
         navigate(`/`);
         window.location.reload();
-        console.log(`clicked on delete`);
     }
+
+    //when clicked on edit button
     const clickEditGameReview=()=>{
         //navigate to EditGameReview.jsx
         navigate(`/games/review/edit/${id}`, { state: { record: state.record } });
-        //console.log(state.record);
     }
 
+    //display review data and buttons for edit and delete
     return(
         <Row style={{height:'80vh'}}>
             <Col span={10} offset={7} >

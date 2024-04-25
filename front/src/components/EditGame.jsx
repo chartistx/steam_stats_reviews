@@ -3,38 +3,36 @@ import {Form, Input,InputNumber, Button, Row, Col} from 'antd';
 import { useNavigate } from "react-router-dom";
 
 export default function EditGame() {
-    const { state } = useLocation();
-    //console.log(state.record.id);
+    
+    const { state } = useLocation();//get game data from previous page
 
-    const navigate = useNavigate();
+    const navigate = useNavigate();//used for navigation
 
+    //runs if form submission is successful
     const onFinish = (values) => {
-        
-        //console.log('Success:', values);
-        //edit changes in database a
-        //redirect home and refresh window
-
-        //send form data to server
+        //request options
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(values)
         };
-    
+        //send form data to server
         fetch(`http://localhost:5000/api/game/${state.record.id}`, requestOptions)
             .then(response => response.json())
             .then(data => console.log(`Response to add new game: ${data.id}`));
     
     
-        //on row submit navigate to home
+        //on row submit navigate back to game card, refresh to show changes
         navigate(`/games/${state.record.id}`, { state: { record: values } });
         window.location.reload();
     };
-    
+
+    //runs if form submission fails
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
+    //create form for editing game data
     return (
         <>
         <Row>

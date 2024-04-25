@@ -2,41 +2,35 @@
 import { Table, Button, Input, Col} from 'antd';
 import { useNavigate } from "react-router-dom";
 import { SearchOutlined} from '@ant-design/icons';
-import Search from 'antd/es/transfer/search';
-//import React, {onClick } from 'react';
-//import  { useNavigate , Router} from 'react-router-dom'
-//compare values for sorting
+
+//compare string values // used for sorting
 function compareVlues(var1,var2){
     return var1>var2?1:var1===var2?0:-1;
 }
+
+//compare number values // used for sorting
 function compareNrVlues(var1,var2){
     var1=Number(var1);
     var2=Number(var2);
     return var1>var2?1:var1===var2?0:-1;
 }
 
-const GameStatList = ({ gameStats }) => {
 
+const GameStatList = ({ gameStats }) => {
     const navigate = useNavigate();
 
-    function handleClick( record) {//on row click navigate to specific game
-        //go to GameCard.jsx
-       //console.log(record);
+    //on row click navigate to specific game
+    function handleClick( record) {
        navigate(`/games/${record.id}`, { state: { record: record } });
     }
 
+    //clciked on add new game button
     function clickAddNewGame() {
-        //go to NewGame.jsx
+        //go to NewGame.jsx // add new game page
         navigate(`/add_new_game`);
       }
-
-    // const clickDeleteGame=(record)=>{
-    //     console.log(`clicked on ${record.id}`);
-    //     //fetch(`http://localhost:5000/games${record.id}`, { method: 'DELETE' })
-    //     //.then(() => this.setState({ status: 'Delete successful' }));
-    //     //window.location.reload();
-    // }
-
+    
+    //column names used in table
     const columnNames =[
         {
             title: 'rank',
@@ -48,24 +42,26 @@ const GameStatList = ({ gameStats }) => {
                     <Input 
                     style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
                     placeholder='Type here'
-                    value={selectedKeys[0]}
-                    onChange={
+                    
+                    value={selectedKeys[0]}//holds value of search input
+                    onChange={//on input change update saved value
                         (e)=>{
                         setSelectedKeys(e.target.value? [e.target.value]:[]);
                         }
                     }
-                    onPressEnter={
+                    onPressEnter={//on enter press search and filter table
                         (e)=>{
                             confirm();
                         }
                     }
-                    onBlur={
+                    onBlur={//on clicking off from input window search and filter table
                         (e)=>{
                             confirm();
                         }
                     }
                     
                     />
+                    {/* Buttons that are used in search window */}
                     <Button onClick={()=>confirm()} type='primary'>Search</Button>
                     <Button danger onClick={()=>clearFilters()} >Clear Filters</Button>
                     <Button default style={{float:'right'}} onClick={()=>close()} >Close</Button>
@@ -77,8 +73,10 @@ const GameStatList = ({ gameStats }) => {
             filterIcon:()=>{
                 return <SearchOutlined style={{color:'blue'}}/>
             },
-            onFilter:(value,record)=>{
-                //console.log(record);
+            onFilter:(value,record)=>{//on search confirmation
+                //convert nr to sring so it can be searched
+                //value from search box and check if cell value contains search value
+                //using lowercase to make search case insensitive
                 return record.rank.toString().toLowerCase().includes(value);
             },
 
@@ -94,6 +92,7 @@ const GameStatList = ({ gameStats }) => {
                 return(
                     <>
                     <Input 
+                    //refer to column "rank" for comments
                     style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
                     placeholder='Type here'
                     value={selectedKeys[0]}
@@ -142,6 +141,7 @@ const GameStatList = ({ gameStats }) => {
                 return(
                     <>
                     <Input 
+                    //refer to column "rank" for comments
                     style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
                     placeholder='Type here'
                     value={selectedKeys[0]}
@@ -189,6 +189,7 @@ const GameStatList = ({ gameStats }) => {
                 return(
                     <>
                     <Input 
+                    //refer to column "rank" for comments
                     style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
                     placeholder='Type here'
                     value={selectedKeys[0]}
@@ -237,6 +238,7 @@ const GameStatList = ({ gameStats }) => {
                 return(
                     <>
                     <Input 
+                    //refer to column "rank" for comments
                     style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
                     placeholder='Type here'
                     value={selectedKeys[0]}
@@ -269,7 +271,6 @@ const GameStatList = ({ gameStats }) => {
                 return <SearchOutlined style={{color:'blue'}}/>
             },
             onFilter:(value,record)=>{
-                //console.log(record);
                 return record.genre.toLowerCase().includes(value.toLowerCase());
             },
             sorter: (row_1, row_2) => {
@@ -284,6 +285,7 @@ const GameStatList = ({ gameStats }) => {
                 return(
                     <>
                     <Input 
+                    //refer to column "rank" for comments
                     style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
                     placeholder='Type here'
                     value={selectedKeys[0]}
@@ -331,6 +333,7 @@ const GameStatList = ({ gameStats }) => {
                 return(
                     <>
                     <Input 
+                    //refer to column "rank" for comments
                     style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
                     placeholder='Type here'
                     value={selectedKeys[0]}
@@ -363,7 +366,7 @@ const GameStatList = ({ gameStats }) => {
                 return <SearchOutlined style={{color:'blue'}}/>
             },
             onFilter:(value,record)=>{
-                //console.log(record);
+                
                 return record.na_sales.toString().toLowerCase().includes(value);
             },
             sorter: (row_1, row_2) => {
@@ -378,6 +381,7 @@ const GameStatList = ({ gameStats }) => {
                 return(
                     <>
                     <Input 
+                    //refer to column "rank" for comments
                     style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
                     placeholder='Type here'
                     value={selectedKeys[0]}
@@ -425,6 +429,7 @@ const GameStatList = ({ gameStats }) => {
                 return(
                     <>
                     <Input 
+                    //refer to column "rank" for comments
                     style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
                     placeholder='Type here'
                     value={selectedKeys[0]}
@@ -457,7 +462,7 @@ const GameStatList = ({ gameStats }) => {
                 return <SearchOutlined style={{color:'blue'}}/>
             },
             onFilter:(value,record)=>{
-                //console.log(record);
+                
                 return record.jp_sales.toString().toLowerCase().includes(value);
             },
             sorter: (row_1, row_2) => {
@@ -472,6 +477,7 @@ const GameStatList = ({ gameStats }) => {
                 return(
                     <>
                     <Input 
+                    //refer to column "rank" for comments
                     style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
                     placeholder='Type here'
                     value={selectedKeys[0]}
@@ -519,6 +525,7 @@ const GameStatList = ({ gameStats }) => {
                 return(
                     <>
                     <Input 
+                    //refer to column "rank" for comments
                     style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
                     placeholder='Type here'
                     value={selectedKeys[0]}
@@ -566,6 +573,7 @@ const GameStatList = ({ gameStats }) => {
                 return(
                     <>
                     <Input 
+                    //refer to column "rank" for comments
                     style={{borderColor:'royalBlue',backgroundColor:'lavender'}} 
                     placeholder='Type here'
                     value={selectedKeys[0]}
@@ -606,23 +614,10 @@ const GameStatList = ({ gameStats }) => {
                 
             }
         }
-        // {
-        //     title: 'Actions',
-        //     key: 'actions',
-        //     render: (record) => {
-        //         return (<>
-        //             <EditOutlined style={{color:'blue'}}/>
-        //             <DeleteOutlined 
-        //                 style={{color:'red'}}
-        //                 onClick={clickDeleteGame(record)}
-        //                 key='delete_game'/>
-        //         </>)
-        //     }
-        // },
     ];    
 
    
-
+    //create table with game statistics data and review count
     return(
         
         <>
@@ -638,7 +633,8 @@ const GameStatList = ({ gameStats }) => {
             onRow={(record) => {
                 return {
                     onClick: () => {
-                        //console.log(`clicked on ${record.id}`);
+                        //clicked on row 
+                        // go to selected game description and select reviews
                         //go to GameCard.jsx
                         handleClick(record);
                     }

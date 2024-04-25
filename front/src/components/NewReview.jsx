@@ -3,46 +3,42 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 export default function NewReview() {
-    const { state } = useLocation();
+
+    const { state } = useLocation();//get game name from previous page
     const navigate = useNavigate();
 
-    const { Option } = Select;//used in dropdown menu
-    const { TextArea } = Input;
+    const { Option } = Select;//used in dropdown menu in form
+    const { TextArea } = Input;//used for review text in form
 
 
 
-
+    //runs when form is submitted successfully
     const onFinish = (values) => {
         console.log('Success:', values);
        
-        
-        //edit changes in database a
-        //redirect home and refresh window
-
         //send form data to server
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(values)
         };
-        
+        //send values to server to insert review data into database
         fetch(`http://localhost:5000/api/game/reviews/new`, requestOptions)
             .then(response => response.json())
             .then(data => console.log('Review Successfully created'));
-    
     
         //on row submit navigate to home
         navigate(`/` );
         window.location.reload();
     };
     
+    //runs when form is submitted with errors
     const onFinishFailed = (errorInfo) => {
-        //console.log(state.record.id);
-        //console.log(state.record);
         console.log('Failed:', errorInfo);
     };
 
-
+    //create form for new review
+    //game name cant be changed
     return (
         <>
         <Row>
@@ -111,10 +107,9 @@ export default function NewReview() {
                     },
                 ]}
                 >
-                <Select
+                    {/* selection box for review sentiment */}
+                <Select 
                     placeholder="Select a option and change input text above"
-                    //onChange={onGenderChange}
-                    //allowClear
                     >
                     <Option value="1">Would recommend the game</Option>
                     <Option value="-1">Would NOT recommend the game</Option>
@@ -133,10 +128,10 @@ export default function NewReview() {
                     },
                 ]}
                 >
+                {/* selection box for review vote */}
                 <Select
                     placeholder="Select a option and change input text above"
-                    //onChange={onGenderChange}
-                    //allowClear
+    
                     >
                     <Option value="1">Game was recommended by another user</Option>
                     <Option value="0">Game was NOT recommended by another user</Option>

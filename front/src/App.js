@@ -16,23 +16,21 @@ const { Header,Content,Footer} = Layout;
 
 function App() {
 
-  const [gameStats, setGameStats] = useState(null); 
+  const [gameStats, setGameStats] = useState(null); //used to pass data to GameStatList where all games are displayed
 
   useEffect(() => {
     //fetch vgsales data with reviews count for each game
     fetch('http://localhost:5000/api/0')
       .then(res=>{
-        //console.log(res);
         return res.json();
       })
       .then(data=>{
-        //console.log(data);
         setGameStats(data);
       });
   }, []);
   
   
-
+  //main window that holds all components
   return (
   <>
     <BrowserRouter>

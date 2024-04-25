@@ -6,32 +6,30 @@ import { useNavigate } from "react-router-dom";
 export default function NewGame() {
     const navigate = useNavigate();
 
+    //runs when form is submitted successfully
     const onFinish = (values) => {
-    
-        console.log('Success:', values);
+
         //send form data to server
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(values)
         };
-    
+        //send form data to server to insert game data into database
         fetch(`http://localhost:5000/api/new_game`, requestOptions)
             .then(console.log("new game added"))
-            // .then(response => response.json())
-            // .then(data => console.log(`Response to add new game: ${data.id}`));
-    
-    
-        //on row submit navigate to home
+        //on row submit navigate to home 
+        //refresh window to display new game
         navigate(`/`);
         window.location.reload();
     };
     
+    //runs when form is submitted with errors
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
-
+    //create form for new game
     return (
         <>
         <Row>
