@@ -5,6 +5,13 @@ module.exports = (app,pool)=>{
     //connect to database
     //connectDatabase();
     app.put('/api/game/:id',(req, res) => {
+        //replace all ' wtih '' to avoid sql errors
+        req.body.name = req.body.review_text.replace(/'/g, "''");
+        req.body.platform = req.body.app_name.replace(/'/g, "''");
+        req.body.genre = req.body.review_text.replace(/'/g, "''");
+        req.body.publisher = req.body.review_text.replace(/'/g, "''");
+
+        //update record
         pool.query(`   UPDATE vgsales 
                         SET rank=${req.body.rank},
                             name='${req.body.name}',
@@ -24,8 +31,11 @@ module.exports = (app,pool)=>{
 
     app.post('/api/new_game',(req, res) => {
 
-        //read data from put request
-        
+        //replace all ' with '' to avoid sql errors
+        req.body.name = req.body.review_text.replace(/'/g, "''");
+        req.body.platform = req.body.app_name.replace(/'/g, "''");
+        req.body.genre = req.body.review_text.replace(/'/g, "''");
+        req.body.publisher = req.body.review_text.replace(/'/g, "''");
         //insert new game data into database
         pool.query(`INSERT INTO vgsales VALUES (DEFAULT,${req.body.rank},'${req.body.game_name}','${req.body.platform}',${req.body.year},'${req.body.genre}','${req.body.publisher}',${req.body.na_sales},${req.body.eu_sales},${req.body.jp_sales},${req.body.other_sales},${req.body.global_sales});`);
         

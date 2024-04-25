@@ -73,9 +73,12 @@ module.exports = (app,pool)=>{
         })();
     });
     app.put('/api/game/reviews/description/:id', (req, res) => {
+
         console.log(`test ${req.params.id}`);
+        //replace all ' wtih '' to avoid sql errors
+        req.body.review_text = req.body.review_text.replace(/'/g, "''");
+        req.body.app_name = req.body.app_name.replace(/'/g, "''");
         //update review data in database
-        //console.log(req.body);
         pool.query(`   UPDATE steam_reviews
                         SET 
                             app_name='${req.body.app_name}',
