@@ -1,10 +1,9 @@
 
 module.exports = (app,pool)=>{
 
+    //update game info
     app.put('/api/game/:id',(req, res) => {
-        //replace all ' wtih '' to avoid sql errors
-        //console.log(${req.body});
-        //console.log(req.body);
+        //replace ' with '' to avoid sql errors
         req.body.name = req.body.name.replace(/'/g, "''");
         req.body.platform = req.body.platform.replace(/'/g, "''");
         req.body.genre = req.body.genre.replace(/'/g, "''");
@@ -27,21 +26,22 @@ module.exports = (app,pool)=>{
         
     });
 
-
+    //add new game
     app.post('/api/new_game',(req, res) => {
-        //console.log(req.body);
         //replace all ' with '' to avoid sql errors
         req.body.game_name = req.body.game_name.replace(/'/g, "''");
         req.body.platform = req.body.platform.replace(/'/g, "''");
         req.body.genre = req.body.genre.replace(/'/g, "''");
         req.body.publisher = req.body.publisher.replace(/'/g, "''");
+
         //insert new game data into database
         pool.query(`INSERT INTO vgsales VALUES (DEFAULT,${req.body.rank},'${req.body.game_name}','${req.body.platform}',${req.body.year},'${req.body.genre}','${req.body.publisher}',${req.body.na_sales},${req.body.eu_sales},${req.body.jp_sales},${req.body.other_sales},${req.body.global_sales});`);
                
-});
+    });
     
-
+    //get all games
     app.get('/api/:page', (req, res) => {
+        //get from database vgsales data + review count
         (async () => {
             try{
                 const {rows} = await pool.query(`SELECT vgsales.id,vgsales.rank,vgsales.name,
@@ -67,13 +67,10 @@ module.exports = (app,pool)=>{
         
     });
 
-    
-   
-    //console.log('test');
-
+    //delete game
     app.delete('/games/:id', (req, res) => {
+        //delete game data record from database
         pool.query(`DELETE FROM vgsales WHERE vgsales.id = ${req.params.id};`);
-        //console.log(req.params.id);
     });
 
 };

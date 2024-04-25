@@ -1,17 +1,15 @@
 module.exports = (app,pool)=>{
 
+    //get game description
     app.get('/api/game/:id', (req, res) => {
-        //console.log(`test ${req.params.id}`);
+        //get game description from database and send it to frontend
         
         (async () => {
             try{
-                //fetch and send game description
                 const {rows} = await pool.query(`SELECT * FROM vgsales
                                                 WHERE id = ${req.params.id}
                                                 ;`);
                 res.send(JSON.stringify(rows));
-
-                //console.log(rows);
             }
             catch(err){
                 console.error(err);
@@ -20,16 +18,16 @@ module.exports = (app,pool)=>{
         
     });
     
-
+    //get game reviews
     app.get('/api/game/reviews/:id', (req, res) => {
-        //console.log(`test ${req.params.id}`);
-        
+        //get game reviews from database and send it to frontend
+
         (async () => {
             let gameName = "";
 
+            //get game name from database then get reviews using name
+            //not the best way to do this
             try{
-                //get game name
-                //not the best method, better should have passed the value to the function
                 const {rows} = await pool.query(`SELECT * FROM vgsales
                                                 WHERE id = ${req.params.id}
                                                 ;`);
@@ -41,9 +39,9 @@ module.exports = (app,pool)=>{
             catch(err){
                 console.error(err);
             }
-
+            // fetch and send reviews to front
             try{
-                // fetch and send reviews
+                
                 gameName = gameName.replace(/'/g, "''");
                 let {rows} = await pool.query(`SELECT * FROM steam_reviews
                                                 WHERE app_name = '${gameName}'
@@ -57,25 +55,25 @@ module.exports = (app,pool)=>{
         
     });
         
+
+
     app.get('/api/game/reviews/description/:id', (req, res) => {
+        //fetch and send game description
         (async () => {
             try{
-                //fetch and send game description
                 const {rows} = await pool.query(`SELECT * FROM steam_reviews
                                                 WHERE id = ${req.params.id}
                                                 ;`);
                 res.send(JSON.stringify(rows));
-
-                //console.log(rows);
             }
             catch(err){
                 console.error(err);
             }
         })();
     });
-    app.put('/api/game/reviews/description/:id', (req, res) => {
 
-        //console.log(`test ${req.params.id}`);
+    //update review data
+    app.put('/api/game/reviews/description/:id', (req, res) => {
         //replace all ' wtih '' to avoid sql errors
         req.body.review_text = req.body.review_text.replace(/'/g, "''");
         req.body.app_name = req.body.app_name.replace(/'/g, "''");
@@ -90,16 +88,18 @@ module.exports = (app,pool)=>{
         
     });
 
+    //insert new review 
     app.post('/api/game/reviews/new', (req, res) => {
         //insert new review data into database
+        //replace all ' with '' to avoid sql errors
         req.body.review_text = req.body.review_text.replace(/'/g, "''");
         req.body.app_name = req.body.app_name.replace(/'/g, "''");
-
-        //console.log(req.body);
+        //insert new review into database
         pool.query(`INSERT INTO steam_reviews 
         VALUES (DEFAULT,${req.body.app_id},'${req.body.app_name}','${req.body.review_text}',${req.body.review_score},${req.body.review_votes});`)
     });
     
+    //delete review
     app.delete('/api/game/reviews/description/:id', (req, res) => {
         //delete review data from database
         pool.query(`DELETE FROM steam_reviews WHERE id = ${req.params.id};`);
