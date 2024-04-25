@@ -1,3 +1,9 @@
+Running code:
+- Currently docker is only used for database , run docker-compose to create database
+- run npm package.json form server to install necesary dependencies for backend
+- install react using dependencies in package.json in front folder
+
+
 Programmēšanas uzdevums:
 
 Izmantojamās tehnoloģijas Nodejs, ReactJs(izmantojot Antd ietvaru),
