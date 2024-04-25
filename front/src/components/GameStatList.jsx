@@ -1,7 +1,7 @@
 
-import { Table, Button, Input} from 'antd';
+import { Table, Button, Input, Col} from 'antd';
 import { useNavigate } from "react-router-dom";
-import {EditOutlined, DeleteOutlined, SearchOutlined} from '@ant-design/icons';
+import { SearchOutlined} from '@ant-design/icons';
 import Search from 'antd/es/transfer/search';
 //import React, {onClick } from 'react';
 //import  { useNavigate , Router} from 'react-router-dom'
@@ -625,11 +625,16 @@ const GameStatList = ({ gameStats }) => {
 
     return(
         
-        <div>
+        <>
             <Button type='primary' key='clickAddNewGame' onClick={clickAddNewGame}>Add New Game</Button>
             
-            <Table 
+            <Table  
+            style={{marginTop:10}}  
+            scroll={{
+                x: window.innerWidth*0.8
+              }}
             //check on click and redirect to game description and reviews
+            span={18}
             onRow={(record) => {
                 return {
                     onClick: () => {
@@ -643,7 +648,7 @@ const GameStatList = ({ gameStats }) => {
             dataSource = {gameStats}>
                 </Table>   
             
-        </div>
+        </>
     );
 }
 export default GameStatList;

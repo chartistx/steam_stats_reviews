@@ -1,5 +1,5 @@
 
-import {Form, Input,InputNumber, Button} from 'antd';
+import {Form, Input,InputNumber, Button,Row,Col} from 'antd';
 import { useNavigate } from "react-router-dom";
 
 
@@ -33,8 +33,14 @@ export default function NewGame() {
 
 
     return (
-        <div>
-            <h1>ADD NEW GAME</h1>
+        <>
+        <Row>
+            <Col span={24}>
+                <h1 style={{textAlign:'center'}}>Add New Game</h1>
+            </Col>
+        </Row>
+        <Row>
+            <Col span={16} offset={5}>
             <Form
                 name="basic"
                 labelCol={{
@@ -212,6 +218,7 @@ export default function NewGame() {
                 </Form.Item>
 
                 <Form.Item
+                style={{textAlign:'center'}}
                 wrapperCol={{
                     offset: 8,
                     span: 16,
@@ -223,8 +230,8 @@ export default function NewGame() {
                 </Form.Item>
             </Form>
 
-            
-            
-        </div>
+            </Col>
+        </Row>
+        </>
     );
 }

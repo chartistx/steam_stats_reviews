@@ -1,4 +1,4 @@
-import {Form, Input,InputNumber, Button,Select} from 'antd';
+import {Form, Input,InputNumber, Button,Select,Row,Col} from 'antd';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
@@ -44,8 +44,15 @@ export default function NewReview() {
 
 
     return (
-        <div>
-            <h1>ADD NEW REVIEW</h1>
+        <>
+        <Row>
+            <Col span={24}>
+                <h1 style={{textAlign:'center'}}>Add New Review</h1>
+            </Col>
+
+        </Row>
+        <Row>
+            <Col span={16} offset={5}>
             <Form
                 name="basic"
                 labelCol={{
@@ -152,6 +159,7 @@ export default function NewReview() {
                 
 
                 <Form.Item
+                style={{textAlign:'center'}}
                 wrapperCol={{
                     offset: 8,
                     span: 16,
@@ -163,8 +171,8 @@ export default function NewReview() {
                 </Form.Item>
             </Form>
 
-            
-            
-        </div>
+            </Col>
+        </Row>
+        </>
     );
 }

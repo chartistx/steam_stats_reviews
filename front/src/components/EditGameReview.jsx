@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import {Form, Input,InputNumber, Button,Select} from 'antd';
+import {Form, Input,InputNumber, Button,Select,Row,Col} from 'antd';
 import { useNavigate } from "react-router-dom";
 //import {Option} from 'antd/es/mentions';
 
@@ -49,9 +49,11 @@ export default function EditGameReview() {
     };
 
     return (
-        <div>
-            <h1>EDIT GAME</h1>
+        <Row style={{height:'80vh'}}>
+            <Col span={14} offset={5} >
+            <h1 style={{textAlign:'center'}}>Edit Review</h1>
             <Form
+                
                 name="basic"
                 labelCol={{
                 span: 8,
@@ -138,19 +140,20 @@ export default function EditGameReview() {
                 
 
                 <Form.Item
+                style={{textAlign:'center'}}
                 wrapperCol={{
                     offset: 8,
                     span: 16,
                 }}
                 >
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" >
                     Submit
                 </Button>
                 </Form.Item>
             </Form>
 
             
-            
-        </div>
+            </Col>
+        </Row>
     );
 }

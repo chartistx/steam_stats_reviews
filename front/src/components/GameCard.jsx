@@ -1,4 +1,4 @@
-import { Table,Button } from 'antd';
+import { Col,Row,Table,Button} from 'antd';
 import { useParams } from "react-router-dom";
 import React, {useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ export default function GameCard (){
         navigate(`/games/review/${record.id}`, { state: { record: record } });
     }
 
-    const [gameDescription, setGameData] = useState(null); //holds game description data rows
+    //const [gameDescription, setGameData] = useState(null); //holds game description data rows
     const [gameReviews, setGameReviews] = useState(null);  //holds game reviews data rows
 
     const clickDeleteGame=()=>{
@@ -45,37 +45,22 @@ export default function GameCard (){
       }
     //clumn names used in table
     const columnNames =[
-        // {
-        //     title: 'app_id',
-        //     dataIndex: 'app_id',
-        //     key: 'app_id',
-        //     sorter: (row_1, row_2) => {
-        //         return compareNrVlues(row_1.rank,row_2.rank);
-        //     }
-        // },
-        // {
-        //     title: 'app_name',
-        //     dataIndex: 'app_name',
-        //     key: 'app_name',
-        //     sorter: (row_1, row_2) => {
-        //         return compareVlues(row_1.rank,row_2.rank);
-        //     }
-        // },
+
         {
             title: 'review_score',
             dataIndex: 'review_score',
-            key: 'review_score',
-            sorter: (row_1, row_2) => {
-                return compareNrVlues(row_1.rank,row_2.rank);
-            }
+            key: 'review_score'
+            // sorter: (row_1, row_2) => {
+            //     return compareNrVlues(row_1.rank,row_2.rank);
+            // }
         },
         {
             title: 'review_votes',
             dataIndex: 'review_votes',
-            key: 'review_votes',
-            sorter: (row_1, row_2) => {
-                return compareNrVlues(row_1.rank,row_2.rank);
-            }
+            key: 'review_votes'
+            // sorter: (row_1, row_2) => {
+            //     return compareNrVlues(row_1.rank,row_2.rank);
+            // }
         },
         {
             title: 'review_text',
@@ -86,15 +71,15 @@ export default function GameCard (){
 
     useEffect(() => {
         //fetch game description
-        fetch(`http://localhost:5000/api/game/${id}`)
-        .then(res=>{
-            //console.log(res);
-            return res.json();
-        })
-        .then(data=>{
-            console.log(data);
-            setGameData(data);
-        });
+        // fetch(`http://localhost:5000/api/game/${id}`)
+        // .then(res=>{
+        //     //console.log(res);
+        //     return res.json();
+        // })
+        // .then(data=>{
+        //     console.log(data);
+        //     setGameData(data);
+        // });
 
         //fetch game reviews
         fetch(`http://localhost:5000/api/game/reviews/${id}`)
@@ -109,20 +94,21 @@ export default function GameCard (){
       }, []);
     
     function ReviewDescription () { //return game description
-        if(gameDescription != null){
+        if(state.record != null){
             return(
-                <div>
-                    <p>Game name: {gameDescription[0].name}</p>
-                    <p>Genre: {gameDescription[0].genre}</p>
-                    <p>Platform: {gameDescription[0].platform}</p>
-                    <p>Publisher: {gameDescription[0].publisher}</p>
-                    <p>Year: {gameDescription[0].year}</p>
-                    <p>Rank: {gameDescription[0].rank}</p>
-                    <p>NA Sales: {gameDescription[0].na_sales}</p>
-                    <p>EU Sales: {gameDescription[0].eu_sales}</p>
-                    <p>JP Sales: {gameDescription[0].jp_sales}</p>
-                    <p>Other Sales: {gameDescription[0].other_sales}</p>
-                    <p>Global Sales: {gameDescription[0].global_sales}</p>
+                <div style={{backgroundColor:'white',textAlign:'center', margin:'10px',padding:'10px',borderRadius:'10px'}}>
+                    
+                    <p><b>Game name: </b>{state.record.name}</p>
+                    <p><b>Genre: </b>{state.record.genre}</p>
+                    <p><b>Platform: </b>{state.record.platform}</p>
+                    <p><b>Publisher: </b>{state.record.publisher}</p>
+                    <p><b>Year: </b>{state.record.year}</p>
+                    <p><b>Rank: </b>{state.record.rank}</p>
+                    <p><b>NA Sales: </b>{state.record.na_sales}</p>
+                    <p><b>EU Sales: </b>{state.record.eu_sales}</p>
+                    <p><b>JP Sales: </b>{state.record.jp_sales}</p>
+                    <p><b>Other Sales: </b>{state.record.other_sales}</p>
+                    <p><b>Global Sales: </b>{state.record.global_sales}</p>
                 </div>
             );
         }
@@ -130,32 +116,36 @@ export default function GameCard (){
     }
 
     return (
-        <div>
-            <div>
+        <Row>
+            <Col span={6} >
                 <h1 >Game Description</h1>
-                <Button
-                    onClick={clickEditGame}>
-                <EditOutlined 
-                    style={{color:'blue'}}
-                    />
-                </Button>
-                <Button
-                    onClick={clickDeleteGame}>
-                    <DeleteOutlined 
-                    style={{color:'red'}}
-                    />
-                </Button>
+                <div style={{marginLeft:'10px'}}>
+                    <Button
+                        onClick={clickEditGame}>
+                    <EditOutlined 
+                        style={{color:'blue'}}
+                        />
+                    </Button>
+                    <Button
+                        onClick={clickDeleteGame}>
+                        <DeleteOutlined 
+                        style={{color:'red'}}
+                        />
+                    </Button>
+                </div>
                 
                 
                 
-                <ReviewDescription/>
-            </div>
-            <div>
-                <h1>Reviews</h1>
                 
-                <Button key='clickAddNewReview' onClick={clickAddNewGameReview} type='primary'>Add New Review</Button>
+                <ReviewDescription />
+            </Col>
+            <Col span={18}>
+                <h1 style={{textAlign:'center'}}>Reviews</h1>
+                
+                <Button style={{marginBottom:'10px',float:'right'}} key='clickAddNewReview' onClick={clickAddNewGameReview} type='primary'>Add New Review</Button>
                 
                 <Table 
+                    
                     //check on click and redirect to specific review
                     onRow={(record) => {
                         return {
@@ -168,9 +158,9 @@ export default function GameCard (){
                     columns = {columnNames} 
                     dataSource = {gameReviews}>
                 </Table>
-            </div>
+            </Col>
                        
             
-        </div>
+        </Row>
     );
 }

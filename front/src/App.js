@@ -9,6 +9,9 @@ import EditGameReview from './components/EditGameReview';
 import NewReview from './components/NewReview';
 import  { BrowserRouter,Routes, Route ,Link} from 'react-router-dom';
 
+import { Row,Col, Layout} from 'antd';
+const { Header,Content,Footer} = Layout;
+
 
 
 function App() {
@@ -31,31 +34,36 @@ function App() {
   
 
   return (
-    <div>
-      
-        <BrowserRouter>
+  <>
+    <BrowserRouter>
+      <Row >
+        <Col style={{width: '100%'}}>
+        <Header style={{textAlign:'center', fontWeight: 'bold', backgroundColor:'midnightBlue',height:'80px'}} >
+          <Link to='/'>GAME STATS</Link>
+        </Header>
+        </Col>
+      </Row>
+        <Content style={{backgroundColor:'lightBlue',paddingTop:'20px', minHeight:'80vh'}}>
+          <Row>
+            <Col span={18} offset={3}>
+              <Routes>
+                <Route path="/" element={<GameStatList gameStats={gameStats} />} />
+                <Route path="/add_new_game" element={<NewGame/>} />
 
+                <Route path="/games/new_review" element={<NewReview/>} />
+                <Route path="/games/:id" element={<GameCard/>} />
 
-          <h1><Link to='/'>Game Stats</Link></h1>
-          <Routes>
-            <Route path="/" element={<GameStatList gameStats={gameStats} />} />
-            <Route path="/add_new_game" element={<NewGame/>} />
-
-            <Route path="/games/new_review" element={<NewReview/>} />
-            <Route path="/games/:id" element={<GameCard/>} />
-
-            <Route path="/games/edit/:id" element={<EditGame/>} />
-            <Route path="/games/review/:id" element={<ReviewCard/>} />
-            
-            <Route path="/games/review/edit/:id" element={<EditGameReview/>} />
-
-
-          </Routes>
-
-          
-        </BrowserRouter>
-      
-    </div>
+                <Route path="/games/edit/:id" element={<EditGame/>} />
+                <Route path="/games/review/:id" element={<ReviewCard/>} />
+                
+                <Route path="/games/review/edit/:id" element={<EditGameReview/>} />
+              </Routes>
+            </Col>
+          </Row>
+      </Content>
+      <Footer style={{backgroundColor:'midnightBlue', color: 'white'}}><p style={{ textAlign:'right'}}>Steam statistics 2024</p></Footer>
+    </BrowserRouter>
+  </>
   );
 }
 
