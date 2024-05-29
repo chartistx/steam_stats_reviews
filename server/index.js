@@ -10,6 +10,7 @@ app.use( bodyParser.json() );
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 
+//database connection
 const { Pool } = require('pg');
 const pool = new Pool({
     user: 'root',

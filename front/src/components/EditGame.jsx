@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import {Form, Input,InputNumber, Button, Row, Col} from 'antd';
 import { useNavigate } from "react-router-dom";
 
+
 export default function EditGame() {
     
     const { state } = useLocation();//get game data from previous page
