@@ -1,3 +1,9 @@
+Iepriekšējās zināšanas par izmantotajām tehnoloģijām - Git, neliela pieredze darbā ar datubāzēm.
+Laiks tehnoloģiju apgūšanai un uzdevumu izpildei - 7 dienas. 
+Laiks cik bija iespējams veltīt - četras ar pusi dienas.
+
+Šobrīd kods satur daudzus trūkumus un tam ir nepieciešami uzlabojumi.
+
 Running code:
 - Currently docker is only used for database , run docker-compose to create database
 - run npm package.json form server to install necesary dependencies for backend
