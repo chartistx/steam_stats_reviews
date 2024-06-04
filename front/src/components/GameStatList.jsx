@@ -9,7 +9,20 @@ import SearchWindow from './SearchWindow';
 const GameStatList = ({ gameStats }) => {
   const navigate = useNavigate();
   const [showSearch, setShowSearch] = useState(false);
-  
+  const [searchValues, setSearchValues] = useState({ //search data from search window, used for filtering
+    "rank":null,
+    "game_name":"",
+    "platform":"",
+    "year":null,
+    "genre":"",
+    "publisher":"",
+    "na_sales":null,
+    "eu_sales":null,
+    "jp_sales":null,
+    "other_sales":null,
+    "global_sales":null,
+    "review_count":null});
+
   //compare string values // used for sorting
   const compareVlues=(var1, var2)=>  {
     return var1 > var2 ? 1 : var1 === var2 ? 0 : -1;
@@ -35,69 +48,66 @@ const GameStatList = ({ gameStats }) => {
   const clickSearch = () => {
     //toggle show search window
     showSearch? setShowSearch(false): setShowSearch(true);
-    console.log(showSearch);
+    //console.log(showSearch);
     
   }
-
+  console.log(searchValues);
   //column names used in table
+//   const columnNames = [];
+//   //use filter keys to create columns
+//   for(let key in searchValues){
+//     //generate necesary column data
+//     const column = {
+//         title: key,
+//         dataIndex: key,
+//         key: key,
+//         filteredValue: [searchValues[key]],
+//         onFilter: (value, record) => {
+//         //on search confirmation
+//         //convert nr to sring so it can be searched
+//         //value from search box and check if cell value contains search value
+//         //using lowercase to make search case insensitive
+
+//         if(value==="null"||value===""){
+//             return true;
+//         }
+//         return record[key].toString().toLowerCase().includes(value);
+//         },
+
+//         sorter: (row_1, row_2) => {
+//         if(key==="rank"||key==="year"||key==="na_sales"||
+//         key==="eu_sales"||key==="jp_sales"||key==="other_sales"||
+//         key==="global_sales"||key==="review_count"){
+//             return compareNrVlues(row_1.rank, row_2.rank);
+//         }
+//         else{
+//             return compareVlues(row_1.rank, row_2.rank);
+//         }
+
+//         },
+//     };
+
+//     //add column to list
+//     columnNames.push(column);
+//     }
+//     console.log(columnNames);
+
+//column names used in table
   const columnNames = [
     {
       title: "rank",
       dataIndex: "rank",
       key: "rank",
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-        close,
-      }) => {
-        return (
-          <>
-            <Input
-              style={{ borderColor: "royalBlue", backgroundColor: "lavender" }}
-              placeholder="Type here"
-              value={selectedKeys[0]} //holds value of search input
-              onChange={
-                //on input change update saved value
-                (e) => {
-                  setSelectedKeys(e.target.value ? [e.target.value] : []);
-                }
-              }
-              onPressEnter={
-                //on enter press search and filter table
-                (e) => {
-                  confirm();
-                }
-              }
-              onBlur={
-                //on clicking off from input window search and filter table
-                (e) => {
-                  confirm();
-                }
-              }
-            />
-            {/* Buttons that are used in search window */}
-            <Button onClick={() => confirm()} type="primary">
-              Search
-            </Button>
-            <Button danger onClick={() => clearFilters()}>
-              Clear Filters
-            </Button>
-            <Button default style={{ float: "right" }} onClick={() => close()}>
-              Close
-            </Button>
-          </>
-        );
-      },
-      filterIcon: () => {
-        return <SearchOutlined style={{ color: "blue" }} />;
-      },
+      filteredValue: [searchValues.rank],
       onFilter: (value, record) => {
         //on search confirmation
         //convert nr to sring so it can be searched
         //value from search box and check if cell value contains search value
         //using lowercase to make search case insensitive
+        
+        if(value==="null"){
+          return true;
+        }
         return record.rank.toString().toLowerCase().includes(value);
       },
 
@@ -109,46 +119,11 @@ const GameStatList = ({ gameStats }) => {
       title: "name",
       dataIndex: "name",
       key: "name",
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-        close,
-      }) => {
-        return (
-          <>
-            <Input
-              //refer to column "rank" for comments
-              style={{ borderColor: "royalBlue", backgroundColor: "lavender" }}
-              placeholder="Type here"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-              }}
-              onPressEnter={(e) => {
-                confirm();
-              }}
-              onBlur={(e) => {
-                confirm();
-              }}
-            />
-            <Button onClick={() => confirm()} type="primary">
-              Search
-            </Button>
-            <Button danger onClick={() => clearFilters()}>
-              Clear Filters
-            </Button>
-            <Button default style={{ float: "right" }} onClick={() => close()}>
-              Close
-            </Button>
-          </>
-        );
-      },
-      filterIcon: () => {
-        return <SearchOutlined style={{ color: "blue" }} />;
-      },
+      filteredValue: [searchValues.game_name],
       onFilter: (value, record) => {
+        if(value===""){
+          return true;
+        }
         //console.log(record);
         return record.name.toLowerCase().includes(value.toLowerCase());
       },
@@ -160,47 +135,14 @@ const GameStatList = ({ gameStats }) => {
       title: "platform",
       dataIndex: "platform",
       key: "platform",
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-        close,
-      }) => {
-        return (
-          <>
-            <Input
-              //refer to column "rank" for comments
-              style={{ borderColor: "royalBlue", backgroundColor: "lavender" }}
-              placeholder="Type here"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-              }}
-              onPressEnter={(e) => {
-                confirm();
-              }}
-              onBlur={(e) => {
-                confirm();
-              }}
-            />
-            <Button onClick={() => confirm()} type="primary">
-              Search
-            </Button>
-            <Button danger onClick={() => clearFilters()}>
-              Clear Filters
-            </Button>
-            <Button default style={{ float: "right" }} onClick={() => close()}>
-              Close
-            </Button>
-          </>
-        );
-      },
-      filterIcon: () => {
-        return <SearchOutlined style={{ color: "blue" }} />;
-      },
+      filteredValue: [searchValues.platform],
       onFilter: (value, record) => {
         //console.log(record);
+        //console.log(value);
+        if(value===""){
+            return true;
+            
+        }
         return record.platform.toLowerCase().includes(value.toLowerCase());
       },
       sorter: (row_1, row_2) => {
@@ -211,47 +153,16 @@ const GameStatList = ({ gameStats }) => {
       title: "year",
       dataIndex: "year",
       key: "year",
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-        close,
-      }) => {
-        return (
-          <>
-            <Input
-              //refer to column "rank" for comments
-              style={{ borderColor: "royalBlue", backgroundColor: "lavender" }}
-              placeholder="Type here"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-              }}
-              onPressEnter={(e) => {
-                confirm();
-              }}
-              onBlur={(e) => {
-                confirm();
-              }}
-            />
-            <Button onClick={() => confirm()} type="primary">
-              Search
-            </Button>
-            <Button danger onClick={() => clearFilters()}>
-              Clear Filters
-            </Button>
-            <Button default style={{ float: "right" }} onClick={() => close()}>
-              Close
-            </Button>
-          </>
-        );
-      },
-      filterIcon: () => {
-        return <SearchOutlined style={{ color: "blue" }} />;
-      },
+      filteredValue: [searchValues.year],
       onFilter: (value, record) => {
-        //console.log(record);
+        //on search confirmation
+        //convert nr to sring so it can be searched
+        //value from search box and check if cell value contains search value
+        //using lowercase to make search case insensitive
+        
+        if(value==="null"){
+          return true;
+        }
         return record.year.toString().toLowerCase().includes(value);
       },
       sorter: (row_1, row_2) => {
@@ -262,47 +173,17 @@ const GameStatList = ({ gameStats }) => {
       title: "genre",
       dataIndex: "genre",
       key: "genre",
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-        close,
-      }) => {
-        return (
-          <>
-            <Input
-              //refer to column "rank" for comments
-              style={{ borderColor: "royalBlue", backgroundColor: "lavender" }}
-              placeholder="Type here"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-              }}
-              onPressEnter={(e) => {
-                confirm();
-              }}
-              onBlur={(e) => {
-                confirm();
-              }}
-            />
-            <Button onClick={() => confirm()} type="primary">
-              Search
-            </Button>
-            <Button danger onClick={() => clearFilters()}>
-              Clear Filters
-            </Button>
-            <Button default style={{ float: "right" }} onClick={() => close()}>
-              Close
-            </Button>
-          </>
-        );
-      },
-      filterIcon: () => {
-        return <SearchOutlined style={{ color: "blue" }} />;
-      },
+      filteredValue: [searchValues.genre],
       onFilter: (value, record) => {
-        return record.genre.toLowerCase().includes(value.toLowerCase());
+        //on search confirmation
+        //convert nr to sring so it can be searched
+        //value from search box and check if cell value contains search value
+        //using lowercase to make search case insensitive
+        
+        if(value===""){
+          return true;
+        }
+        return record.genre.toString().toLowerCase().includes(value);
       },
       sorter: (row_1, row_2) => {
         return compareVlues(row_1.genre, row_2.genre);
@@ -312,48 +193,17 @@ const GameStatList = ({ gameStats }) => {
       title: "publisher",
       dataIndex: "publisher",
       key: "publisher",
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-        close,
-      }) => {
-        return (
-          <>
-            <Input
-              //refer to column "rank" for comments
-              style={{ borderColor: "royalBlue", backgroundColor: "lavender" }}
-              placeholder="Type here"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-              }}
-              onPressEnter={(e) => {
-                confirm();
-              }}
-              onBlur={(e) => {
-                confirm();
-              }}
-            />
-            <Button onClick={() => confirm()} type="primary">
-              Search
-            </Button>
-            <Button danger onClick={() => clearFilters()}>
-              Clear Filters
-            </Button>
-            <Button default style={{ float: "right" }} onClick={() => close()}>
-              Close
-            </Button>
-          </>
-        );
-      },
-      filterIcon: () => {
-        return <SearchOutlined style={{ color: "blue" }} />;
-      },
+      filteredValue: [searchValues.publisher],
       onFilter: (value, record) => {
-        //console.log(record);
-        return record.publisher.toLowerCase().includes(value.toLowerCase());
+        //on search confirmation
+        //convert nr to sring so it can be searched
+        //value from search box and check if cell value contains search value
+        //using lowercase to make search case insensitive
+        
+        if(value===""){
+          return true;
+        }
+        return record.publisher.toString().toLowerCase().includes(value);
       },
       sorter: (row_1, row_2) => {
         return compareVlues(row_1.publisher, row_2.publisher);
@@ -363,46 +213,16 @@ const GameStatList = ({ gameStats }) => {
       title: "na_sales",
       dataIndex: "na_sales",
       key: "na_sales",
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-        close,
-      }) => {
-        return (
-          <>
-            <Input
-              //refer to column "rank" for comments
-              style={{ borderColor: "royalBlue", backgroundColor: "lavender" }}
-              placeholder="Type here"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-              }}
-              onPressEnter={(e) => {
-                confirm();
-              }}
-              onBlur={(e) => {
-                confirm();
-              }}
-            />
-            <Button onClick={() => confirm()} type="primary">
-              Search
-            </Button>
-            <Button danger onClick={() => clearFilters()}>
-              Clear Filters
-            </Button>
-            <Button default style={{ float: "right" }} onClick={() => close()}>
-              Close
-            </Button>
-          </>
-        );
-      },
-      filterIcon: () => {
-        return <SearchOutlined style={{ color: "blue" }} />;
-      },
+      filteredValue: [searchValues.na_sales],
       onFilter: (value, record) => {
+        //on search confirmation
+        //convert nr to sring so it can be searched
+        //value from search box and check if cell value contains search value
+        //using lowercase to make search case insensitive
+        
+        if(value==="null"){
+          return true;
+        }
         return record.na_sales.toString().toLowerCase().includes(value);
       },
       sorter: (row_1, row_2) => {
@@ -413,47 +233,16 @@ const GameStatList = ({ gameStats }) => {
       title: "eu_sales",
       dataIndex: "eu_sales",
       key: "eu_sales",
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-        close,
-      }) => {
-        return (
-          <>
-            <Input
-              //refer to column "rank" for comments
-              style={{ borderColor: "royalBlue", backgroundColor: "lavender" }}
-              placeholder="Type here"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-              }}
-              onPressEnter={(e) => {
-                confirm();
-              }}
-              onBlur={(e) => {
-                confirm();
-              }}
-            />
-            <Button onClick={() => confirm()} type="primary">
-              Search
-            </Button>
-            <Button danger onClick={() => clearFilters()}>
-              Clear Filters
-            </Button>
-            <Button default style={{ float: "right" }} onClick={() => close()}>
-              Close
-            </Button>
-          </>
-        );
-      },
-      filterIcon: () => {
-        return <SearchOutlined style={{ color: "blue" }} />;
-      },
+      filteredValue: [searchValues.eu_sales],
       onFilter: (value, record) => {
-        //console.log(record);
+        //on search confirmation
+        //convert nr to sring so it can be searched
+        //value from search box and check if cell value contains search value
+        //using lowercase to make search case insensitive
+        
+        if(value==="null"){
+          return true;
+        }
         return record.eu_sales.toString().toLowerCase().includes(value);
       },
       sorter: (row_1, row_2) => {
@@ -464,46 +253,16 @@ const GameStatList = ({ gameStats }) => {
       title: "jp_sales",
       dataIndex: "jp_sales",
       key: "jp_sales",
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-        close,
-      }) => {
-        return (
-          <>
-            <Input
-              //refer to column "rank" for comments
-              style={{ borderColor: "royalBlue", backgroundColor: "lavender" }}
-              placeholder="Type here"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-              }}
-              onPressEnter={(e) => {
-                confirm();
-              }}
-              onBlur={(e) => {
-                confirm();
-              }}
-            />
-            <Button onClick={() => confirm()} type="primary">
-              Search
-            </Button>
-            <Button danger onClick={() => clearFilters()}>
-              Clear Filters
-            </Button>
-            <Button default style={{ float: "right" }} onClick={() => close()}>
-              Close
-            </Button>
-          </>
-        );
-      },
-      filterIcon: () => {
-        return <SearchOutlined style={{ color: "blue" }} />;
-      },
+      filteredValue: [searchValues.jp_sales],
       onFilter: (value, record) => {
+        //on search confirmation
+        //convert nr to sring so it can be searched
+        //value from search box and check if cell value contains search value
+        //using lowercase to make search case insensitive
+        
+        if(value==="null"){
+          return true;
+        }
         return record.jp_sales.toString().toLowerCase().includes(value);
       },
       sorter: (row_1, row_2) => {
@@ -514,47 +273,16 @@ const GameStatList = ({ gameStats }) => {
       title: "other_sales",
       dataIndex: "other_sales",
       key: "other_sales",
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-        close,
-      }) => {
-        return (
-          <>
-            <Input
-              //refer to column "rank" for comments
-              style={{ borderColor: "royalBlue", backgroundColor: "lavender" }}
-              placeholder="Type here"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-              }}
-              onPressEnter={(e) => {
-                confirm();
-              }}
-              onBlur={(e) => {
-                confirm();
-              }}
-            />
-            <Button onClick={() => confirm()} type="primary">
-              Search
-            </Button>
-            <Button danger onClick={() => clearFilters()}>
-              Clear Filters
-            </Button>
-            <Button default style={{ float: "right" }} onClick={() => close()}>
-              Close
-            </Button>
-          </>
-        );
-      },
-      filterIcon: () => {
-        return <SearchOutlined style={{ color: "blue" }} />;
-      },
+      filteredValue: [searchValues.other_sales],
       onFilter: (value, record) => {
-        //console.log(record);
+        //on search confirmation
+        //convert nr to sring so it can be searched
+        //value from search box and check if cell value contains search value
+        //using lowercase to make search case insensitive
+        
+        if(value==="null"){
+          return true;
+        }
         return record.other_sales.toString().toLowerCase().includes(value);
       },
       sorter: (row_1, row_2) => {
@@ -565,47 +293,17 @@ const GameStatList = ({ gameStats }) => {
       title: "global_sales",
       dataIndex: "global_sales",
       key: "global_sales",
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-        close,
-      }) => {
-        return (
-          <>
-            <Input
-              //refer to column "rank" for comments
-              style={{ borderColor: "royalBlue", backgroundColor: "lavender" }}
-              placeholder="Type here"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-              }}
-              onPressEnter={(e) => {
-                confirm();
-              }}
-              onBlur={(e) => {
-                confirm();
-              }}
-            />
-            <Button onClick={() => confirm()} type="primary">
-              Search
-            </Button>
-            <Button danger onClick={() => clearFilters()}>
-              Clear Filters
-            </Button>
-            <Button default style={{ float: "right" }} onClick={() => close()}>
-              Close
-            </Button>
-          </>
-        );
-      },
-      filterIcon: () => {
-        return <SearchOutlined style={{ color: "blue" }} />;
-      },
+      filteredValue: [searchValues.global_sales],
       onFilter: (value, record) => {
-        //console.log(record);
+        //on search confirmation
+        //convert nr to sring so it can be searched
+        //value from search box and check if cell value contains search value
+        //using lowercase to make search case insensitive
+        
+        if(value==="null"){
+          //console.log("null");
+            return true;
+        }
         return record.global_sales.toString().toLowerCase().includes(value);
       },
       sorter: (row_1, row_2) => {
@@ -616,47 +314,16 @@ const GameStatList = ({ gameStats }) => {
       title: "review_count",
       dataIndex: "review_count",
       key: "review_count",
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-        close,
-      }) => {
-        return (
-          <>
-            <Input
-              //refer to column "rank" for comments
-              style={{ borderColor: "royalBlue", backgroundColor: "lavender" }}
-              placeholder="Type here"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-              }}
-              onPressEnter={(e) => {
-                confirm();
-              }}
-              onBlur={(e) => {
-                confirm();
-              }}
-            />
-            <Button onClick={() => confirm()} type="primary">
-              Search
-            </Button>
-            <Button danger onClick={() => clearFilters()}>
-              Clear Filters
-            </Button>
-            <Button default style={{ float: "right" }} onClick={() => close()}>
-              Close
-            </Button>
-          </>
-        );
-      },
-      filterIcon: () => {
-        return <SearchOutlined style={{ color: "blue" }} />;
-      },
+      filteredValue: [searchValues.review_count],
       onFilter: (value, record) => {
-        //console.log(record);
+        //on search confirmation
+        //convert nr to sring so it can be searched
+        //value from search box and check if cell value contains search value
+        //using lowercase to make search case insensitive
+        
+        if(value==="null"){
+          return true;
+        }
         return record.review_count.toString().toLowerCase().includes(value);
       },
       sorter: (row_1, row_2) => {
@@ -671,15 +338,16 @@ const GameStatList = ({ gameStats }) => {
       <Button type="primary" key="clickAddNewGame" onClick={clickAddNewGame}>
         Add New Game
       </Button>
-      <Button type="primary" key="clickSearch" style={{ float: "right" }} onClick={clickSearch}>
+      {//Toggle search button visibility
+      !showSearch?<Button type="primary" key="clickSearch" style={{ float: "right" }} onClick={clickSearch}>
         Search
         <SearchOutlined
           style={{ color: "white", float: "right", marginTop: "5px" }}
         />
-      </Button>
-      {//show search window when search button is clicked
-      showSearch?<SearchWindow/>:<></>}
-
+      </Button>:<></>}
+      
+    {//toogle between search window and data table when search button is clicked 
+      showSearch?<SearchWindow clickSearch={clickSearch} setSearchValues={setSearchValues} searchValues={searchValues} />:
       <Table
         style={{ marginTop: 10 }}
         scroll={{
@@ -697,9 +365,13 @@ const GameStatList = ({ gameStats }) => {
             },
           };
         }}
+        
+
         columns={columnNames}
         dataSource={gameStats}
-      ></Table>
+      ></Table>}
+        
+      
     </>
   );
 };
