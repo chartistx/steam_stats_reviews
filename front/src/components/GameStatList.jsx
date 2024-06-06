@@ -51,7 +51,7 @@ const GameStatList = ({ gameStats }) => {
     //console.log(showSearch);
     
   }
-  console.log(searchValues);
+  //console.log(searchValues);
   //column names used in table
 //   const columnNames = [];
 //   //use filter keys to create columns
@@ -137,8 +137,7 @@ const GameStatList = ({ gameStats }) => {
       key: "platform",
       filteredValue: [searchValues.platform],
       onFilter: (value, record) => {
-        //console.log(record);
-        //console.log(value);
+
         if(value===""){
             return true;
             
@@ -301,7 +300,6 @@ const GameStatList = ({ gameStats }) => {
         //using lowercase to make search case insensitive
         
         if(value==="null"){
-          //console.log("null");
             return true;
         }
         return record.global_sales.toString().toLowerCase().includes(value);

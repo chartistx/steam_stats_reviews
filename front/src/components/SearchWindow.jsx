@@ -14,7 +14,7 @@ export default function SearcWindow (props){
     // }
    
     const onFinish = (values) => {
-        console.log(values);
+        //console.log(values);
         props.setSearchValues(values);
         props.clickSearch();
         //send form data to server
@@ -26,6 +26,24 @@ export default function SearcWindow (props){
         //console.log(state.record);
         
     };
+    const clearFilter = () => {
+        const values = {
+            "rank":null,
+            "game_name":"",
+            "platform":"",
+            "year":null,
+            "genre":"",
+            "publisher":"",
+            "na_sales":null,
+            "eu_sales":null,
+            "jp_sales":null,
+            "other_sales":null,
+            "global_sales":null,
+            "review_count":null
+        };
+        props.setSearchValues(values);
+        //window.location.reload();
+    }
 
     return (
         <div style={{paddingTop:"50px", backgroundColor:"SkyBlue", margin:"10px 0px 20px 0px", borderRadius:"10px"}}>
@@ -223,19 +241,54 @@ export default function SearcWindow (props){
                     min="0"
                   />
                 </Form.Item>
-
-                <Form.Item
-                style={{textAlign:'center'}}
-                wrapperCol={{
-                    offset: 8,
-                    span: 16,
-                }}
-                >
-                    
-                <Button type="primary" htmlType="submit">
-                    Search
-                </Button>
-                </Form.Item>
+                <Row>
+                    <Col span={6} offset={6}>
+            
+                        <Form.Item
+                        style={{textAlign:'center' }}
+                        wrapperCol={{
+                            offset: 8,
+                            span: 16,
+                        }}
+                        >
+                            
+                        <Button type="primary" danger >
+                            Cancel
+                        </Button>
+                        </Form.Item>
+                    </Col>
+                <Col  span={6}>
+                        
+                    <Form.Item
+                    style={{textAlign:'center' }}
+                    wrapperCol={{
+                        offset: 8,
+                        span: 16,
+                    }}
+                    >
+                        
+                    <Button danger ghost 
+                    onClick={clearFilter}>
+                        Clear
+                    </Button>
+                    </Form.Item>
+                    </Col>
+                    <Col  span={6}>
+                    <Form.Item
+                    style={{textAlign:'center'}}
+                    wrapperCol={{
+                        offset: 8,
+                        span: 16,
+                    }}
+                    >
+                        
+                    <Button type="primary" htmlType="submit">
+                        Search
+                    </Button>
+                    </Form.Item>
+                    </Col>
+                </Row>
+                
             </Form>
             </Col>
             </Row>
