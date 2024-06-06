@@ -13,6 +13,8 @@ export default function SearcWindow (props){
     //         placeholder="Type here" />);
     // }
    
+    const [form] = Form.useForm();
+
     const onFinish = (values) => {
         //console.log(values);
         props.setSearchValues(values);
@@ -27,7 +29,8 @@ export default function SearcWindow (props){
         
     };
     const clearFilter = () => {
-        const values = {
+        //using set fields values to clear form because form.resetFields() is not clearing fields with initial values
+        form.setFieldsValue({ 
             "rank":null,
             "game_name":"",
             "platform":"",
@@ -39,10 +42,10 @@ export default function SearcWindow (props){
             "jp_sales":null,
             "other_sales":null,
             "global_sales":null,
-            "review_count":null
-        };
-        props.setSearchValues(values);
-        //window.location.reload();
+            "review_count":null});
+    }
+    const cancelSearch=()=>{
+        props.clickSearch();
     }
 
     return (
@@ -51,7 +54,7 @@ export default function SearcWindow (props){
             <Row style={{height:'80%'}}>
             <Col span={14} offset={3}  >
             <Form
-                
+                form={form}
                 name="basic"
                 labelCol={{
                 span: 8,
@@ -252,7 +255,7 @@ export default function SearcWindow (props){
                         }}
                         >
                             
-                        <Button type="primary" danger >
+                        <Button type="primary" danger  onClick={cancelSearch}>
                             Cancel
                         </Button>
                         </Form.Item>
@@ -267,8 +270,7 @@ export default function SearcWindow (props){
                     }}
                     >
                         
-                    <Button danger ghost 
-                    onClick={clearFilter}>
+                    <Button danger ghost onClick={clearFilter}>
                         Clear
                     </Button>
                     </Form.Item>
