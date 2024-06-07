@@ -1,98 +1,57 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Table, Button, Input, Col } from "antd";
 import { useNavigate } from "react-router-dom";
 import { SearchOutlined } from "@ant-design/icons";
-import SearchWindow from './SearchWindow';
-
-
+import SearchWindow from "./SearchWindow";
 
 const GameStatList = ({ gameStats }) => {
   const navigate = useNavigate();
   const [showSearch, setShowSearch] = useState(false);
-  const [searchValues, setSearchValues] = useState({ //search data from search window, used for filtering
-    "rank":null,
-    "game_name":"",
-    "platform":"",
-    "year":null,
-    "genre":"",
-    "publisher":"",
-    "na_sales":null,
-    "eu_sales":null,
-    "jp_sales":null,
-    "other_sales":null,
-    "global_sales":null,
-    "review_count":null});
+  const [searchValues, setSearchValues] = useState({
+    //search data from search window, used for filtering
+    rank: null,
+    game_name: "",
+    platform: "",
+    year: null,
+    genre: "",
+    publisher: "",
+    na_sales: null,
+    eu_sales: null,
+    jp_sales: null,
+    other_sales: null,
+    global_sales: null,
+    review_count: null,
+  });
 
   //compare string values // used for sorting
-  const compareVlues=(var1, var2)=>  {
+  const compareVlues = (var1, var2) => {
     return var1 > var2 ? 1 : var1 === var2 ? 0 : -1;
-  }
-  
+  };
+
   //compare number values // used for sorting
-  const compareNrVlues=(var1, var2)=> {
+  const compareNrVlues = (var1, var2) => {
     var1 = Number(var1);
     var2 = Number(var2);
     return var1 > var2 ? 1 : var1 === var2 ? 0 : -1;
-  }
+  };
   //on row click navigate to specific game
-  const handleClick=(record) =>{
+  const handleClick = (record) => {
     navigate(`/games/${record.id}`, { state: { record: record } });
-  }
+  };
 
   //clciked on add new game button
-  const clickAddNewGame=() =>{
+  const clickAddNewGame = () => {
     //go to NewGame.jsx // add new game page
     navigate(`/add_new_game`);
-  }
+  };
   //clicked on search button
   const clickSearch = () => {
     //toggle show search window
-    showSearch? setShowSearch(false): setShowSearch(true);
+    showSearch ? setShowSearch(false) : setShowSearch(true);
     //console.log(showSearch);
-    
-  }
-  //console.log(searchValues);
+  };
+
   //column names used in table
-//   const columnNames = [];
-//   //use filter keys to create columns
-//   for(let key in searchValues){
-//     //generate necesary column data
-//     const column = {
-//         title: key,
-//         dataIndex: key,
-//         key: key,
-//         filteredValue: [searchValues[key]],
-//         onFilter: (value, record) => {
-//         //on search confirmation
-//         //convert nr to sring so it can be searched
-//         //value from search box and check if cell value contains search value
-//         //using lowercase to make search case insensitive
-
-//         if(value==="null"||value===""){
-//             return true;
-//         }
-//         return record[key].toString().toLowerCase().includes(value);
-//         },
-
-//         sorter: (row_1, row_2) => {
-//         if(key==="rank"||key==="year"||key==="na_sales"||
-//         key==="eu_sales"||key==="jp_sales"||key==="other_sales"||
-//         key==="global_sales"||key==="review_count"){
-//             return compareNrVlues(row_1.rank, row_2.rank);
-//         }
-//         else{
-//             return compareVlues(row_1.rank, row_2.rank);
-//         }
-
-//         },
-//     };
-
-//     //add column to list
-//     columnNames.push(column);
-//     }
-//     console.log(columnNames);
-
-//column names used in table
   const columnNames = [
     {
       title: "rank",
@@ -104,8 +63,8 @@ const GameStatList = ({ gameStats }) => {
         //convert nr to sring so it can be searched
         //value from search box and check if cell value contains search value
         //using lowercase to make search case insensitive
-        
-        if(value==="null"){
+
+        if (value === "null") {
           return true;
         }
         return record.rank.toString().toLowerCase().includes(value);
@@ -121,7 +80,7 @@ const GameStatList = ({ gameStats }) => {
       key: "name",
       filteredValue: [searchValues.game_name],
       onFilter: (value, record) => {
-        if(value===""){
+        if (value === "") {
           return true;
         }
         //console.log(record);
@@ -137,10 +96,8 @@ const GameStatList = ({ gameStats }) => {
       key: "platform",
       filteredValue: [searchValues.platform],
       onFilter: (value, record) => {
-
-        if(value===""){
-            return true;
-            
+        if (value === "") {
+          return true;
         }
         return record.platform.toLowerCase().includes(value.toLowerCase());
       },
@@ -158,8 +115,8 @@ const GameStatList = ({ gameStats }) => {
         //convert nr to sring so it can be searched
         //value from search box and check if cell value contains search value
         //using lowercase to make search case insensitive
-        
-        if(value==="null"){
+
+        if (value === "null") {
           return true;
         }
         return record.year.toString().toLowerCase().includes(value);
@@ -178,8 +135,8 @@ const GameStatList = ({ gameStats }) => {
         //convert nr to sring so it can be searched
         //value from search box and check if cell value contains search value
         //using lowercase to make search case insensitive
-        
-        if(value===""){
+
+        if (value === "") {
           return true;
         }
         return record.genre.toString().toLowerCase().includes(value);
@@ -198,8 +155,8 @@ const GameStatList = ({ gameStats }) => {
         //convert nr to sring so it can be searched
         //value from search box and check if cell value contains search value
         //using lowercase to make search case insensitive
-        
-        if(value===""){
+
+        if (value === "") {
           return true;
         }
         return record.publisher.toString().toLowerCase().includes(value);
@@ -218,8 +175,8 @@ const GameStatList = ({ gameStats }) => {
         //convert nr to sring so it can be searched
         //value from search box and check if cell value contains search value
         //using lowercase to make search case insensitive
-        
-        if(value==="null"){
+
+        if (value === "null") {
           return true;
         }
         return record.na_sales.toString().toLowerCase().includes(value);
@@ -238,8 +195,8 @@ const GameStatList = ({ gameStats }) => {
         //convert nr to sring so it can be searched
         //value from search box and check if cell value contains search value
         //using lowercase to make search case insensitive
-        
-        if(value==="null"){
+
+        if (value === "null") {
           return true;
         }
         return record.eu_sales.toString().toLowerCase().includes(value);
@@ -258,8 +215,8 @@ const GameStatList = ({ gameStats }) => {
         //convert nr to sring so it can be searched
         //value from search box and check if cell value contains search value
         //using lowercase to make search case insensitive
-        
-        if(value==="null"){
+
+        if (value === "null") {
           return true;
         }
         return record.jp_sales.toString().toLowerCase().includes(value);
@@ -278,8 +235,8 @@ const GameStatList = ({ gameStats }) => {
         //convert nr to sring so it can be searched
         //value from search box and check if cell value contains search value
         //using lowercase to make search case insensitive
-        
-        if(value==="null"){
+
+        if (value === "null") {
           return true;
         }
         return record.other_sales.toString().toLowerCase().includes(value);
@@ -298,9 +255,9 @@ const GameStatList = ({ gameStats }) => {
         //convert nr to sring so it can be searched
         //value from search box and check if cell value contains search value
         //using lowercase to make search case insensitive
-        
-        if(value==="null"){
-            return true;
+
+        if (value === "null") {
+          return true;
         }
         return record.global_sales.toString().toLowerCase().includes(value);
       },
@@ -318,8 +275,8 @@ const GameStatList = ({ gameStats }) => {
         //convert nr to sring so it can be searched
         //value from search box and check if cell value contains search value
         //using lowercase to make search case insensitive
-        
-        if(value==="null"){
+
+        if (value === "null") {
           return true;
         }
         return record.review_count.toString().toLowerCase().includes(value);
@@ -336,40 +293,56 @@ const GameStatList = ({ gameStats }) => {
       <Button type="primary" key="clickAddNewGame" onClick={clickAddNewGame}>
         Add New Game
       </Button>
-      {//Toggle search button visibility
-      !showSearch?<Button type="primary" key="clickSearch" style={{ float: "right" }} onClick={clickSearch}>
-        Search
-        <SearchOutlined
-          style={{ color: "white", float: "right", marginTop: "5px" }}
-        />
-      </Button>:<></>}
-      
-    {//toogle between search window and data table when search button is clicked 
-      showSearch?<SearchWindow clickSearch={clickSearch} setSearchValues={setSearchValues} searchValues={searchValues} />:
-      <Table
-        style={{ marginTop: 10 }}
-        scroll={{
-          x: window.innerWidth * 0.8,
-        }}
-        //check on click and redirect to game description and reviews
-        span={18}
-        onRow={(record) => {
-          return {
-            onClick: () => {
-              //clicked on row
-              // go to selected game description and select reviews
-              //go to GameCard.jsx
-              handleClick(record);
-            },
-          };
-        }}
-        
+      {
+        //Toggle search button visibility
+        !showSearch ? (
+          <Button
+            type="primary"
+            key="clickSearch"
+            style={{ float: "right" }}
+            onClick={clickSearch}
+          >
+            Search
+            <SearchOutlined
+              style={{ color: "white", float: "right", marginTop: "5px" }}
+            />
+          </Button>
+        ) : (
+          <></>
+        )
+      }
 
-        columns={columnNames}
-        dataSource={gameStats}
-      ></Table>}
-        
-      
+      {
+        //toogle between search window and data table when search button is clicked
+        showSearch ? (
+          <SearchWindow
+            clickSearch={clickSearch}
+            setSearchValues={setSearchValues}
+            searchValues={searchValues}
+          />
+        ) : (
+          <Table
+            style={{ marginTop: 10 }}
+            scroll={{
+              x: window.innerWidth * 0.8,
+            }}
+            //check on click and redirect to game description and reviews
+            span={18}
+            onRow={(record) => {
+              return {
+                onClick: () => {
+                  //clicked on row
+                  // go to selected game description and select reviews
+                  //go to GameCard.jsx
+                  handleClick(record);
+                },
+              };
+            }}
+            columns={columnNames}
+            dataSource={gameStats}
+          ></Table>
+        )
+      }
     </>
   );
 };

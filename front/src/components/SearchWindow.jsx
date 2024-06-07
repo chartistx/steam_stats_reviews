@@ -1,328 +1,281 @@
-import {Input, Form, Button, Select, Row, Col, InputNumber} from "antd";
-import {Option} from 'antd/es/mentions';
+import { Input, Form, Button, Select, Row, Col, InputNumber } from "antd";
 
-export default function SearcWindow (props){
-    // MUSt be wrapped in a useEffect
-    // const rows = [];
-    
-    // for(let i=0; i<12; i++){
-    //     rows.push(
-            
-    //         <Input
-    //         style={{ borderColor: "royalBlue", backgroundColor: "lavender" }}
-    //         placeholder="Type here" />);
-    // }
-   
-    const [form] = Form.useForm();
+export default function SearcWindow(props) {
+  const [form] = Form.useForm(); //create form instance
 
-    const onFinish = (values) => {
-        //console.log(values);
-        props.setSearchValues(values);
-        props.clickSearch();
-        //send form data to server
-        
-    };
-    
-    //runs if form submission fails
-    const onFinishFailed = (errorInfo) => {
-        //console.log(state.record);
-        
-    };
-    const clearFilter = () => {
-        //using set fields values to clear form because form.resetFields() is not clearing fields with initial values
-        form.setFieldsValue({ 
-            "rank":null,
-            "game_name":"",
-            "platform":"",
-            "year":null,
-            "genre":"",
-            "publisher":"",
-            "na_sales":null,
-            "eu_sales":null,
-            "jp_sales":null,
-            "other_sales":null,
-            "global_sales":null,
-            "review_count":null});
-    }
-    const cancelSearch=()=>{
-        props.clickSearch();
-    }
+  const onFinish = (values) => {
+    //save search values to state and close search window
+    props.setSearchValues(values);
+    props.clickSearch();
+  };
 
-    return (
-        <div style={{paddingTop:"50px", backgroundColor:"SkyBlue", margin:"10px 0px 20px 0px", borderRadius:"10px"}}>
-            {/* //position:"absolute", top: "100px", background:"LightGray", width:"100%", height:"75%",paddingTop:"10%"  */}
-            <Row style={{height:'80%'}}>
-            <Col span={14} offset={3}  >
-            <Form
-                form={form}
-                name="basic"
-                labelCol={{
-                span: 8,
-                }}
-                wrapperCol={{
-                span: 16,
-                }}
-                style={{
-                maxWidth: 600,
-                }}
-                initialValues={props.searchValues}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-                autoComplete="off"
-                
+  //runs if form submission fails
+  const onFinishFailed = (errorInfo) => {
+    console.log(errorInfo);
+  };
+  const clearFilter = () => {
+    //using set fields values to clear form because form.resetFields() is not clearing fields with initial values
+    form.setFieldsValue({
+      rank: null,
+      game_name: "",
+      platform: "",
+      year: null,
+      genre: "",
+      publisher: "",
+      na_sales: null,
+      eu_sales: null,
+      jp_sales: null,
+      other_sales: null,
+      global_sales: null,
+      review_count: null,
+    });
+  };
+  const cancelSearch = () => {
+    //close search window
+    props.clickSearch();
+  };
+
+  return (
+    <div
+      style={{
+        paddingTop: "50px",
+        backgroundColor: "SkyBlue",
+        margin: "10px 0px 20px 0px",
+        borderRadius: "10px",
+      }}
+    >
+      <Row style={{ height: "80%" }}>
+        <Col span={14} offset={3}>
+          <Form
+            form={form}
+            name="basic"
+            labelCol={{
+              span: 8,
+            }}
+            wrapperCol={{
+              span: 16,
+            }}
+            style={{
+              maxWidth: 600,
+            }}
+            initialValues={props.searchValues}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+          >
+            <Form.Item
+              key="rank+item"
+              label="Rank"
+              name="rank"
+              rules={[
+                {
+                  required: false,
+                  message: "Please input game rank!",
+                },
+              ]}
             >
-                <Form.Item
-                label="Rank"
-                name="rank"
-                rules={[
-                    {
-                    required: false,
-                    message: 'Please input game rank!',
-                    },
-                ]}
-                >
-                <InputNumber 
-                    min="1"
-                    
-                    />
-                </Form.Item>
-                <Form.Item
-                label="Game Name"
-                name="game_name"
-                rules={[
-                    {
-                    required: false,
-                    message: 'Please input game name!',
-                    },
-                ]}
-                >
-                <Input />
-                </Form.Item>
-                <Form.Item
-                label="Platform"
-                name="platform"
-                rules={[
-                    {
-                    required: false,
-                    message: 'Please input game platform!',
-                    },
-                ]}
-                >
-                <Input />
-                </Form.Item>
-                <Form.Item
-                label="Year"
-                name="year"
-                rules={[
-                    {
-                    required: false,
-                    message: 'Please input game year!',
-                    },
-                ]}
-                >
-                <InputNumber 
-                    min="0"
-        
-                   />
-                </Form.Item>
-                <Form.Item
-                label="Genre"
-                name="genre"
-                rules={[
-                    {
-                    required: false,
-                    message: 'Please input game genre!',
-                    },
-                ]}
-                >
-                <Input />
-                </Form.Item>
-                <Form.Item
-                label="Publisher"
-                name="publisher"
-                rules={[
-                    {
-                    required: false,
-                    message: 'Please input game publisher!',
-                    },
-                ]}
-                >
-                <Input />
-                </Form.Item>
+              <InputNumber min="1" key="rank_input" />
+            </Form.Item>
+            <Form.Item
+              key="game_name"
+              label="Game Name"
+              name="game_name"
+              rules={[
+                {
+                  required: false,
+                  message: "Please input game name!",
+                },
+              ]}
+            >
+              <Input key="game_name_input" />
+            </Form.Item>
+            <Form.Item
+              key="platform"
+              label="Platform"
+              name="platform"
+              rules={[
+                {
+                  required: false,
+                  message: "Please input game platform!",
+                },
+              ]}
+            >
+              <Input key="platform_input" />
+            </Form.Item>
+            <Form.Item
+              key="year"
+              label="Year"
+              name="year"
+              rules={[
+                {
+                  required: false,
+                  message: "Please input game year!",
+                },
+              ]}
+            >
+              <InputNumber min="0" key="year_input" />
+            </Form.Item>
+            <Form.Item
+              key="genre"
+              label="Genre"
+              name="genre"
+              rules={[
+                {
+                  required: false,
+                  message: "Please input game genre!",
+                },
+              ]}
+            >
+              <Input key="genre_input" />
+            </Form.Item>
+            <Form.Item
+              key="publisher"
+              label="Publisher"
+              name="publisher"
+              rules={[
+                {
+                  required: false,
+                  message: "Please input game publisher!",
+                },
+              ]}
+            >
+              <Input key="publisher_input" />
+            </Form.Item>
 
-                <Form.Item
-                label="NA Sales"
-                name="na_sales"
-                rules={[
-                    {
-                    required: false,
-                    message: 'Please input game NA sales!',
-                    },
-                ]}
-                >
-                <InputNumber 
-                    min="0"
-                    step="0.01"
-                    precision="2"/>
-                </Form.Item>
+            <Form.Item
+              key="na_sales"
+              label="NA Sales"
+              name="na_sales"
+              rules={[
+                {
+                  required: false,
+                  message: "Please input game NA sales!",
+                },
+              ]}
+            >
+              <InputNumber
+                min="0"
+                step="0.01"
+                precision="2"
+                key="na_sales_input"
+              />
+            </Form.Item>
 
-                <Form.Item
-                label="EU Sales"
-                name="eu_sales"
-                rules={[
-                    {
-                    required: false,
-                    message: 'Please input game EU sales!',
-                    },
-                ]}
-                >
-                <InputNumber 
-                    min="0"
-                    step="0.01"
-                    precision="2"/>
-                </Form.Item>
+            <Form.Item
+              key="eu_sales"
+              label="EU Sales"
+              name="eu_sales"
+              rules={[
+                {
+                  required: false,
+                  message: "Please input game EU sales!",
+                },
+              ]}
+            >
+              <InputNumber
+                min="0"
+                step="0.01"
+                precision="2"
+                key="eu_sales_input"
+              />
+            </Form.Item>
 
-                <Form.Item
-                label="JP Sales"
-                name="jp_sales"
-                rules={[
-                    {
-                    required: false,
-                    message: 'Please input game JP sales!',
-                    },
-                ]}
-                >
-                <InputNumber 
-                    min="0"
-                    step="0.01"
-                    precision="2"/>
-                </Form.Item>
+            <Form.Item
+              key="jp_sales"
+              label="JP Sales"
+              name="jp_sales"
+              rules={[
+                {
+                  required: false,
+                  message: "Please input game JP sales!",
+                },
+              ]}
+            >
+              <InputNumber
+                min="0"
+                step="0.01"
+                precision="2"
+                key="jp_sales_input"
+              />
+            </Form.Item>
 
-                <Form.Item
-                label="Other Sales"
-                name="other_sales"
-                rules={[
-                    {
-                    required: false,
-                    message: 'Please input game other sales!',
-                    },
-                ]}
-                >
-                <InputNumber 
-                    min="0"
-                    step="0.01"
-                    precision="2"/>
-                </Form.Item>
+            <Form.Item
+              key="other_sales"
+              label="Other Sales"
+              name="other_sales"
+              rules={[
+                {
+                  required: false,
+                  message: "Please input game other sales!",
+                },
+              ]}
+            >
+              <InputNumber
+                min="0"
+                step="0.01"
+                precision="2"
+                key="other_sales_input"
+              />
+            </Form.Item>
 
-                <Form.Item
-                label="Global Sales"
-                name="global_sales"
-                rules={[
-                    {
-                    required: false,
-                    message: 'Please input game globla sales!',
-                    },
-                ]}
-                >
-                <InputNumber 
-                    min="0"
-                    step="0.01"
-                    precision="2"/>
-                </Form.Item>
+            <Form.Item
+              key="global_sales"
+              label="Global Sales"
+              name="global_sales"
+              rules={[
+                {
+                  required: false,
+                  message: "Please input game globla sales!",
+                },
+              ]}
+            >
+              <InputNumber
+                min="0"
+                step="0.01"
+                precision="2"
+                key="global_sales_input"
+              />
+            </Form.Item>
 
-                <Form.Item
-                label="Review Count"
-                name="review_count"
-                rules={[
-                    {
-                    required: false,
-                    message: 'Please input review count!',
-                    },
-                ]}
-                >
-                <InputNumber 
-                    min="0"
-                  />
+            <Form.Item
+              key="review_count"
+              label="Review Count"
+              name="review_count"
+              rules={[
+                {
+                  required: false,
+                  message: "Please input review count!",
+                },
+              ]}
+            >
+              <InputNumber min="0" key="review_count_input" />
+            </Form.Item>
+            <Row>
+              <Col span={6} offset={6}>
+                <Form.Item style={{ textAlign: "center" }}>
+                  <Button type="primary" danger onClick={cancelSearch}>
+                    Cancel
+                  </Button>
                 </Form.Item>
-                <Row>
-                    <Col span={6} offset={6}>
-            
-                        <Form.Item
-                        style={{textAlign:'center' }}
-                        wrapperCol={{
-                            offset: 8,
-                            span: 16,
-                        }}
-                        >
-                            
-                        <Button type="primary" danger  onClick={cancelSearch}>
-                            Cancel
-                        </Button>
-                        </Form.Item>
-                    </Col>
-                <Col  span={6}>
-                        
-                    <Form.Item
-                    style={{textAlign:'center' }}
-                    wrapperCol={{
-                        offset: 8,
-                        span: 16,
-                    }}
-                    >
-                        
-                    <Button danger ghost onClick={clearFilter}>
-                        Clear
-                    </Button>
-                    </Form.Item>
-                    </Col>
-                    <Col  span={6}>
-                    <Form.Item
-                    style={{textAlign:'center'}}
-                    wrapperCol={{
-                        offset: 8,
-                        span: 16,
-                    }}
-                    >
-                        
-                    <Button type="primary" htmlType="submit">
-                        Search
-                    </Button>
-                    </Form.Item>
-                    </Col>
-                </Row>
-                
-            </Form>
-            </Col>
+              </Col>
+              <Col span={6}>
+                <Form.Item style={{ textAlign: "center" }}>
+                  <Button danger ghost onClick={clearFilter}>
+                    Clear
+                  </Button>
+                </Form.Item>
+              </Col>
+              <Col span={6}>
+                <Form.Item style={{ textAlign: "center" }}>
+                  <Button type="primary" htmlType="submit">
+                    Search
+                  </Button>
+                </Form.Item>
+              </Col>
             </Row>
-            
-        
-            {/* for(let i in range(0,5))
-            <Input
-              style={{ borderColor: "royalBlue", backgroundColor: "lavender" }}
-              placeholder="Type here"
-            //   value={1}//holds value of search input
-            //   onChange={
-            //     //on input change update saved value
-            //     (e) => {
-            //         //setSelectedKeys(e.target.value ? [e.target.value] : []);
-                  
-            //     }
-            //   }
-            //   onPressEnter={
-            //     //on enter press search and filter table
-            //     (e) => {
-                  
-            //     }
-            //   }
-            //   onBlur={
-            //     //on clicking off from input window search and filter table
-            //     (e) => {
-                  
-            //     }
-            //   }
-            /> */}
-        
-        </div>
-        
-    )
+          </Form>
+        </Col>
+      </Row>
+    </div>
+  );
 }
